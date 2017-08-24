@@ -43,4 +43,11 @@ return [
             ]
         ]
     ],
+    'join' => [
+        'class' => \LurdesBot\Music\Youtube\Commands\JoinCommand::class,
+        'help' => [
+            'group' => 'Tuts Tuts',
+            'description' => 'Lurdes Bot entra no canal de audio que você esta.',
+        ]
+    ],
 ];

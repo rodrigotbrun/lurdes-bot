@@ -4,6 +4,8 @@ namespace LurdesBot\Discord;
 
 use Discord\Discord;
 use Hook\Hook;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class DiscordBotLoop extends Discord {
 
@@ -13,17 +15,23 @@ class DiscordBotLoop extends Discord {
      * DiscordBotLoop constructor.
      */
     public function __construct() {
+//        $logger = new Logger('discord_loop');
+//        $file_handler = new StreamHandler(storage_path('logs/discord-loop.log'));
+//        $logger->pushHandler($file_handler);
+
         parent::__construct([
             'token' => CONFIG['discord_bot_token'],
+//            'logger' => $logger,
+//            'loggerLevel' => 'DEBUG'
         ]);
 
         $this->commands = require base_path('bot/Config/commands.php');
     }
 
     public function loop() {
-        Hook::getInstance()->fire('on-discord-ready', [
-            'teste' => ' Mundo'
-        ]);
+//        Hook::getInstance()->fire('on-discord-ready', [
+//            'teste' => ' Mundo'
+//        ]);
 
         $this->on('ready', function ($discord) {
             $discord->on('message', function ($message, $discord) {

@@ -2,12 +2,16 @@
 
 namespace LurdesBot\Discord;
 
+use Discord\Voice\VoiceClient;
 use RestCord\DiscordClient;
 
 class DiscordAPI extends DiscordClient {
 
     /** @var DiscordAPI */
     private static $instance = null;
+
+    /** @var VoiceClient */
+    private static $voiceClient;
 
     /**
      * DiscordAPI constructor.
@@ -25,6 +29,20 @@ class DiscordAPI extends DiscordClient {
         }
 
         return self::$instance;
+    }
+
+    /**
+     * @return VoiceClient
+     */
+    public static function getVoiceClient() {
+        return self::$voiceClient;
+    }
+
+    /**
+     * @param VoiceClient $voiceClient
+     */
+    public static function setVoiceClient($voiceClient) {
+        self::$voiceClient = $voiceClient;
     }
 
 }
