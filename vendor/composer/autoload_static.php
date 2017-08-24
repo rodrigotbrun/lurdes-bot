@@ -78,6 +78,10 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
             'Illuminate\\Contracts\\' => 21,
             'Illuminate\\Container\\' => 21,
         ),
+        'H' => 
+        array (
+            'Hook\\' => 5,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
@@ -234,6 +238,10 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
         'Illuminate\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/illuminate/container',
+        ),
+        'Hook\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/bot/Hook',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (

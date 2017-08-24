@@ -22,7 +22,8 @@
   "autoload": {
     "psr-4": {
       "LurdesBot\\": "bot/Module/",
-      "Entity\\": "bot/Entity/"
+      "Entity\\": "bot/Entity/",
+      "Hook\\": "bot/Hook/"
     }
   }
 }

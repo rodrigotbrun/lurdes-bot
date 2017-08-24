@@ -3,10 +3,11 @@
 namespace LurdesBot\Discord;
 
 use Discord\Discord;
+use Hook\Hook;
 
 class DiscordBotLoop extends Discord {
 
-    private $commands;
+    private $commands = [];
 
     /**
      * DiscordBotLoop constructor.
@@ -20,8 +21,11 @@ class DiscordBotLoop extends Discord {
     }
 
     public function loop() {
-        $this->on('ready', function ($discord) {
+        Hook::getInstance()->fire('on-discord-ready', [
+            'teste' => ' Mundo'
+        ]);
 
+        $this->on('ready', function ($discord) {
             $discord->on('message', function ($message, $discord) {
                 if (!$message->author->user->bot) {
                     if (starts_with($message->content, CONFIG['discord_command_identifier'])) {
