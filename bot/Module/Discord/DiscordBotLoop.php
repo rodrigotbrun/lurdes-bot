@@ -16,7 +16,7 @@ class DiscordBotLoop extends Discord {
             'token' => CONFIG['discord_bot_token'],
         ]);
 
-        $this->commands = require base_path('bot/commands.php');
+        $this->commands = require base_path('bot/Config/commands.php');
     }
 
     public function loop() {

@@ -182,7 +182,7 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
         ),
         'LurdesBot\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/bot',
+            0 => __DIR__ . '/../..' . '/bot/Module',
         ),
         'Illuminate\\Support\\' => 
         array (
@@ -214,7 +214,7 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
         ),
         'Entity\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/entities',
+            0 => __DIR__ . '/../..' . '/bot/Entity',
         ),
         'Dotenv\\' => 
         array (

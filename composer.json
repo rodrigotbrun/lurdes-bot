@@ -18,8 +18,8 @@
   },
   "autoload": {
     "psr-4": {
-      "LurdesBot\\": "bot/",
-      "Entity\\": "entities/"
+      "LurdesBot\\": "bot/Module/",
+      "Entity\\": "bot/Entity/"
     }
   }
 }

@@ -25,13 +25,13 @@ $capsule->bootEloquent();
 
 define('CONFIG', \Entity\Config::getConfig());
 
-require_once __DIR__ . '/bot/colors.php';
+require_once __DIR__ . '/bot/Config/colors.php';
 
 function base_path($file) {
     return __DIR__ . '/' . $file;
 }
 
-$dataLanguage = file_get_contents(__DIR__ . '/bot/Games/LeagueOfLegends/Generators/assets/language-strings.json');
+$dataLanguage = file_get_contents(__DIR__ . '/bot/Module/Games/LeagueOfLegends/Generators/assets/language-strings.json');
 $dataLanguage = json_decode($dataLanguage, true);
 
 function lang($key) {
