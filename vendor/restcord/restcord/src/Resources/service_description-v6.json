@@ -1,0 +1,4295 @@
+{
+    "baseUri": "https://discordapp.com/api/v6",
+    "version": 6,
+    "operations": {
+        "guild": {
+            "createGuild": {
+                "category": "guild",
+                "name": "Create Guild",
+                "description": "Create a new guild.  Fires a Guild Create Gateway event.",
+                "method": "POST",
+                "responseNote": "Returns a guild object on success.",
+                "responseTypes": [
+                    {
+                        "name": "guild",
+                        "type": "guild"
+                    }
+                ],
+                "url": "/guilds",
+                "parameters": {
+                    "name": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "name of the guild (2-100 characters)",
+                        "required": false
+                    },
+                    "region": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "{voice_region.id} for voice",
+                        "required": false
+                    },
+                    "icon": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the guild icon",
+                        "required": false
+                    },
+                    "verification_level": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "guild verification level",
+                        "default": null,
+                        "required": false
+                    },
+                    "default_message_notifications": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "default message notifications setting",
+                        "default": null,
+                        "required": false
+                    },
+                    "roles": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "new guild roles",
+                        "required": false
+                    },
+                    "channels": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "new guild's channels",
+                        "required": false
+                    }
+                }
+            },
+            "getGuild": {
+                "category": "guild",
+                "name": "Get Guild",
+                "description": "",
+                "method": "GET",
+                "responseNote": "Returns the new guild object for the given id.",
+                "responseTypes": [
+                    {
+                        "name": "guild",
+                        "type": "guild"
+                    }
+                ],
+                "url": "/guilds/{guild.id}",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "modifyGuild": {
+                "category": "guild",
+                "name": "Modify Guild",
+                "description": "Modify a guild's settings.  Fires a Guild Update Gateway event.",
+                "method": "PATCH",
+                "responseNote": "Returns the updated guild object on success.",
+                "responseTypes": [
+                    {
+                        "name": "guild",
+                        "type": "guild"
+                    }
+                ],
+                "url": "/guilds/{guild.id}",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "name": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "guild name",
+                        "required": false
+                    },
+                    "region": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "guild {voice_region.id}",
+                        "required": false
+                    },
+                    "verification_level": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "guild verification level",
+                        "default": null,
+                        "required": false
+                    },
+                    "default_message_notifications": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "default message notifications setting",
+                        "default": null,
+                        "required": false
+                    },
+                    "afk_channel_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "id for afk channel",
+                        "required": false
+                    },
+                    "afk_timeout": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "afk timeout in seconds",
+                        "default": null,
+                        "required": false
+                    },
+                    "icon": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the guild icon",
+                        "required": false
+                    },
+                    "owner_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "user id to transfer guild ownership to (must be owner)",
+                        "required": false
+                    },
+                    "splash": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the guild splash (VIP only)",
+                        "required": false
+                    }
+                }
+            },
+            "deleteGuild": {
+                "category": "guild",
+                "name": "Delete Guild",
+                "description": "Delete a guild permanently. User must be owner.  Fires a Guild Delete Gateway event.",
+                "method": "DELETE",
+                "responseNote": "Returns the guild object on success.",
+                "responseTypes": [
+                    {
+                        "name": "guild",
+                        "type": "guild"
+                    }
+                ],
+                "url": "/guilds/{guild.id}",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "getGuildChannels": {
+                "category": "guild",
+                "name": "Get Guild Channels",
+                "description": "",
+                "method": "GET",
+                "responseNote": "Returns a list of guild channel objects.",
+                "responseTypes": [
+                    {
+                        "name": "channel",
+                        "type": "guild-channel"
+                    }
+                ],
+                "url": "/guilds/{guild.id}/channels",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "createGuildChannel": {
+                "category": "guild",
+                "name": "Create Guild Channel",
+                "description": "Create a new channel object for the guild. Requires the 'MANAGE_CHANNELS' permission.  Fires a Channel Create Gateway event.",
+                "method": "POST",
+                "responseNote": "Returns the new channel object on success.",
+                "responseTypes": [
+                    {
+                        "name": "channel",
+                        "type": "guild-channel"
+                    }
+                ],
+                "url": "/guilds/{guild.id}/channels",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "name": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "channel name (2-100 characters)",
+                        "required": false
+                    },
+                    "type": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "\"voice\" or \"text\"",
+                        "required": false
+                    },
+                    "bitrate": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the bitrate (in bits) of the voice channel (voice only)",
+                        "default": null,
+                        "required": false
+                    },
+                    "user_limit": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the user limit of the voice channel (voice only)",
+                        "default": null,
+                        "required": false
+                    },
+                    "permission_overwrites": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "the channel's permission overwrites",
+                        "required": false
+                    }
+                }
+            },
+            "modifyGuildChannelPositions": {
+                "category": "guild",
+                "name": "Modify Guild Channel Positions",
+                "description": "Modify the positions of a set of channel objects for the guild. Requires 'MANAGE_CHANNELS' permission.  Fires multiple Channel Update Gateway events.",
+                "method": "PATCH",
+                "responseNote": "Returns a list of all of the guild's channel objects on success.",
+                "responseTypes": [
+                    {
+                        "name": "channel",
+                        "type": "guild-channel"
+                    }
+                ],
+                "url": "/guilds/{guild.id}/channels",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "channel id",
+                        "required": false
+                    },
+                    "position": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "sorting position of the channel",
+                        "default": null,
+                        "required": false
+                    }
+                }
+            },
+            "getGuildMember": {
+                "category": "guild",
+                "name": "Get Guild Member",
+                "description": "",
+                "method": "GET",
+                "responseNote": "Returns a guild member object for the specified user.",
+                "responseTypes": [
+                    {
+                        "name": "guild member",
+                        "type": "guild-member"
+                    }
+                ],
+                "url": "/guilds/{guild.id}/members/{user.id}",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "user.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "listGuildMembers": {
+                "category": "guild",
+                "name": "List Guild Members",
+                "description": "",
+                "method": "GET",
+                "responseNote": "Returns a list of guild member objects that are members of the guild.",
+                "responseTypes": [
+                    {
+                        "name": "guild member",
+                        "type": "GUILD/guild-member"
+                    }
+                ],
+                "url": "/guilds/{guild.id}/members",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "limit": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "max number of members to return (1-1000)",
+                        "default": 1,
+                        "required": false
+                    },
+                    "after": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "the highest user id in the previous page",
+                        "default": 0,
+                        "required": false
+                    }
+                }
+            },
+            "addGuildMember": {
+                "category": "guild",
+                "name": "Add Guild Member",
+                "description": "Adds a user to the guild, provided you have a valid oauth2 access token for the user with the guilds.join scope.  Fires a Guild Member Add Gateway event. Requires the bot to have the CREATE_INSTANT_INVITE permission.",
+                "method": "PUT",
+                "responseNote": "Returns a 201 Created with the guild member as the body.",
+                "responseTypes": [
+                    {
+                        "name": "guild member",
+                        "type": "guild-member"
+                    }
+                ],
+                "url": "/guilds/{guild.id}/members/{user.id}",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "user.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "access_token": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "an oauth2 access token granted with the guilds.join to the bot's application for the user you want to add to the guild",
+                        "required": false
+                    },
+                    "nick": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "value to set users nickname to",
+                        "required": false
+                    },
+                    "roles": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "array of roles the member is assigned",
+                        "required": false
+                    },
+                    "mute": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is muted",
+                        "default": false,
+                        "required": false
+                    },
+                    "deaf": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is deafened",
+                        "default": false,
+                        "required": false
+                    }
+                }
+            },
+            "modifyGuildMember": {
+                "category": "guild",
+                "name": "Modify Guild Member",
+                "description": "Modify attributes of a guild member.  Fires a Guild Member Update Gateway event.",
+                "method": "PATCH",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/guilds/{guild.id}/members/{user.id}",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "user.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "nick": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "value to set users nickname to",
+                        "required": false
+                    },
+                    "roles": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "array of roles the member is assigned",
+                        "required": false
+                    },
+                    "mute": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is muted",
+                        "default": false,
+                        "required": false
+                    },
+                    "deaf": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is deafened",
+                        "default": false,
+                        "required": false
+                    },
+                    "channel_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "id of channel to move user to (if they are connected to voice)",
+                        "required": false
+                    }
+                }
+            },
+            "modifyCurrentUsersNick": {
+                "category": "guild",
+                "name": "Modify Current User's Nick",
+                "description": "Modifies the nickname of the current user in a guild.  Fires a Guild Member Update Gateway event.",
+                "method": "PATCH",
+                "responseNote": "Returns a 200 with the nickname on success.",
+                "responseTypes": [],
+                "url": "/guilds/{guild.id}/@me",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "nick": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "value to set users nickname to",
+                        "required": false
+                    }
+                }
+            },
+            "addGuildMemberRole": {
+                "category": "guild",
+                "name": "Add Guild Member Role",
+                "description": "Adds a role to a guild member. Requires the 'MANAGE_ROLES' permission.  Fires a Guild Member Update Gateway event.",
+                "method": "PUT",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/guilds/{guild.id}/members/{user.id}/roles/{role.id}",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "user.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "role.id": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "removeGuildMemberRole": {
+                "category": "guild",
+                "name": "Remove Guild Member Role",
+                "description": "Removes a role from a guild member. Requires the 'MANAGE_ROLES' permission.  Fires a Guild Member Update Gateway event.",
+                "method": "DELETE",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/guilds/{guild.id}/members/{user.id}/roles/{role.id}",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "user.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "role.id": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "removeGuildMember": {
+                "category": "guild",
+                "name": "Remove Guild Member",
+                "description": "Remove a member from a guild. Requires 'KICK_MEMBERS' permission.  Fires a Guild Member Remove Gateway event.",
+                "method": "DELETE",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/guilds/{guild.id}/members/{user.id}",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "user.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "getGuildBans": {
+                "category": "guild",
+                "name": "Get Guild Bans",
+                "description": "Requires the 'BAN_MEMBERS' permission.",
+                "method": "GET",
+                "responseNote": "Returns a list of user objects that are banned from this guild.",
+                "responseTypes": [
+                    {
+                        "name": "user",
+                        "type": "user"
+                    }
+                ],
+                "url": "/guilds/{guild.id}/bans",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "createGuildBan": {
+                "category": "guild",
+                "name": "Create Guild Ban",
+                "description": "Create a guild ban, and optionally delete previous messages sent by the banned user. Requires the 'BAN_MEMBERS' permission.  Fires a Guild Ban Add Gateway event.",
+                "method": "PUT",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/guilds/{guild.id}/bans/{user.id}",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "user.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "delete-message-days": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "number of days to delete messages for (0-7)",
+                        "default": null,
+                        "required": false
+                    }
+                }
+            },
+            "removeGuildBan": {
+                "category": "guild",
+                "name": "Remove Guild Ban",
+                "description": "Remove the ban for a user. Requires the 'BAN_MEMBERS' permissions.  Fires a Guild Ban Remove Gateway event.",
+                "method": "DELETE",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/guilds/{guild.id}/bans/{user.id}",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "user.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "getGuildRoles": {
+                "category": "guild",
+                "name": "Get Guild Roles",
+                "description": "Requires the 'MANAGE_ROLES' permission.",
+                "method": "GET",
+                "responseNote": "Returns a list of role objects for the guild.",
+                "responseTypes": [
+                    {
+                        "name": "role",
+                        "type": "role"
+                    }
+                ],
+                "url": "/guilds/{guild.id}/roles",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "createGuildRole": {
+                "category": "guild",
+                "name": "Create Guild Role",
+                "description": "Create a new role for the guild. Requires the 'MANAGE_ROLES' permission.  Fires a Guild Role Create Gateway event. All JSON params are optional.",
+                "method": "POST",
+                "responseNote": "Returns the new role object on success.",
+                "responseTypes": [
+                    {
+                        "name": "role",
+                        "type": "role"
+                    }
+                ],
+                "url": "/guilds/{guild.id}/roles",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "name": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "name of the role",
+                        "default": "\"new role\"",
+                        "required": false
+                    },
+                    "permissions": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "bitwise of the enabled/disabled permissions",
+                        "default": null,
+                        "required": false
+                    },
+                    "color": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "RGB color value",
+                        "default": 0,
+                        "required": false
+                    },
+                    "hoist": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be displayed separately in the sidebar",
+                        "default": false,
+                        "required": false
+                    },
+                    "mentionable": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be mentionable",
+                        "default": false,
+                        "required": false
+                    }
+                }
+            },
+            "modifyGuildRolePositions": {
+                "category": "guild",
+                "name": "Modify Guild Role Positions",
+                "description": "Modify the positions of a set of role objects for the guild. Requires the 'MANAGE_ROLES' permission.  Fires multiple Guild Role Update Gateway events.",
+                "method": "PATCH",
+                "responseNote": "Returns a list of all of the guild's role objects on success.",
+                "responseTypes": [
+                    {
+                        "name": "role",
+                        "type": "role"
+                    }
+                ],
+                "url": "/guilds/{guild.id}/roles",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "role",
+                        "required": false
+                    },
+                    "position": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "sorting position of the role",
+                        "default": null,
+                        "required": false
+                    }
+                }
+            },
+            "modifyGuildRole": {
+                "category": "guild",
+                "name": "Modify Guild Role",
+                "description": "Modify a guild role. Requires the 'MANAGE_ROLES' permission.  Fires a Guild Role Update Gateway event.",
+                "method": "PATCH",
+                "responseNote": "Returns the updated role on success.",
+                "responseTypes": [
+                    {
+                        "name": "role",
+                        "type": "role"
+                    }
+                ],
+                "url": "/guilds/{guild.id}/roles/{role.id}",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "role.id": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "name": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "name of the role",
+                        "required": false
+                    },
+                    "permissions": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "bitwise of the enabled/disabled permissions",
+                        "default": null,
+                        "required": false
+                    },
+                    "color": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "RGB color value",
+                        "default": null,
+                        "required": false
+                    },
+                    "hoist": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be displayed separately in the sidebar",
+                        "default": false,
+                        "required": false
+                    },
+                    "mentionable": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be mentionable",
+                        "default": false,
+                        "required": false
+                    }
+                }
+            },
+            "deleteGuildRole": {
+                "category": "guild",
+                "name": "Delete Guild Role",
+                "description": "Delete a guild role. Requires the 'MANAGE_ROLES' permission.  Fires a Guild Role Delete Gateway event.",
+                "method": "DELETE",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/guilds/{guild.id}/roles/{role.id}",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "role.id": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "getGuildPruneCount": {
+                "category": "guild",
+                "name": "Get Guild Prune Count",
+                "description": "Requires the 'KICK_MEMBERS' permission.",
+                "method": "GET",
+                "responseNote": "Returns an object with one 'pruned' key indicating the number of members that would be removed in a prune operation.",
+                "responseTypes": [],
+                "url": "/guilds/{guild.id}/prune",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "days": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "number of days to count prune for (1 or more)",
+                        "default": null,
+                        "required": false
+                    }
+                }
+            },
+            "beginGuildPrune": {
+                "category": "guild",
+                "name": "Begin Guild Prune",
+                "description": "Begin a prune operation. Requires the 'KICK_MEMBERS' permission.  Fires multiple Guild Member Remove Gateway events.",
+                "method": "POST",
+                "responseNote": "Returns an object with one 'pruned' key indicating the number of members that were removed in the prune operation.",
+                "responseTypes": [],
+                "url": "/guilds/{guild.id}/prune",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "days": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "number of days to prune (1 or more)",
+                        "default": null,
+                        "required": false
+                    }
+                }
+            },
+            "getGuildVoiceRegions": {
+                "category": "guild",
+                "name": "Get Guild Voice Regions",
+                "description": "Unlike the similar /voice route, this returns VIP servers when the guild is VIP-enabled.",
+                "method": "GET",
+                "responseNote": "Returns a list of voice region objects for the guild.",
+                "responseTypes": [
+                    {
+                        "name": "voice region",
+                        "type": "voice-region"
+                    }
+                ],
+                "url": "/guilds/{guild.id}/regions",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "getGuildInvites": {
+                "category": "guild",
+                "name": "Get Guild Invites",
+                "description": "Requires the 'MANAGE_GUILD' permission.",
+                "method": "GET",
+                "responseNote": "Returns a list of invite objects (with invite metadata) for the guild.",
+                "responseTypes": [
+                    {
+                        "name": "invite",
+                        "type": "invite"
+                    },
+                    {
+                        "name": "invite metadata",
+                        "type": "invite-metadata"
+                    }
+                ],
+                "url": "/guilds/{guild.id}/invites",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "getGuildIntegrations": {
+                "category": "guild",
+                "name": "Get Guild Integrations",
+                "description": "Requires the 'MANAGE_GUILD' permission.",
+                "method": "GET",
+                "responseNote": "Returns a list of integration objects for the guild.",
+                "responseTypes": [
+                    {
+                        "name": "integration",
+                        "type": "integration"
+                    }
+                ],
+                "url": "/guilds/{guild.id}/integrations",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "createGuildIntegration": {
+                "category": "guild",
+                "name": "Create Guild Integration",
+                "description": "Attach an integration object from the current user to the guild. Requires the 'MANAGE_GUILD' permission.  Fires a Guild Integrations Update Gateway event.",
+                "method": "POST",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/guilds/{guild.id}/integrations",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "type": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "the integration type",
+                        "required": false
+                    },
+                    "id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "the integration id",
+                        "required": false
+                    }
+                }
+            },
+            "modifyGuildIntegration": {
+                "category": "guild",
+                "name": "Modify Guild Integration",
+                "description": "Modify the behavior and settings of a integration object for the guild. Requires the 'MANAGE_GUILD' permission.  Fires a Guild Integrations Update Gateway event.",
+                "method": "PATCH",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/guilds/{guild.id}/integrations/{integration.id}",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "integration.id": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "expire_behavior": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the behavior when an integration subscription lapses (see the integration object documentation)",
+                        "default": null,
+                        "required": false
+                    },
+                    "expire_grace_period": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "period (in seconds) where the integration will ignore lapsed subscriptions",
+                        "default": null,
+                        "required": false
+                    },
+                    "enable_emoticons": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether emoticons should be synced for this integration (twitch only currently)",
+                        "default": false,
+                        "required": false
+                    }
+                }
+            },
+            "deleteGuildIntegration": {
+                "category": "guild",
+                "name": "Delete Guild Integration",
+                "description": "Delete the attached integration object for the guild. Requires the 'MANAGE_GUILD' permission.  Fires a Guild Integrations Update Gateway event.",
+                "method": "DELETE",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/guilds/{guild.id}/integrations/{integration.id}",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "integration.id": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "syncGuildIntegration": {
+                "category": "guild",
+                "name": "Sync Guild Integration",
+                "description": "Sync an integration. Requires the 'MANAGE_GUILD' permission.",
+                "method": "POST",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/guilds/{guild.id}/integrations/{integration.id}/sync",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "integration.id": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "getGuildEmbed": {
+                "category": "guild",
+                "name": "Get Guild Embed",
+                "description": "Requires the 'MANAGE_GUILD' permission.",
+                "method": "GET",
+                "responseNote": "Returns the guild embed object.",
+                "responseTypes": [
+                    {
+                        "name": "guild embed",
+                        "type": "guild-embed"
+                    }
+                ],
+                "url": "/guilds/{guild.id}/embed",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "modifyGuildEmbed": {
+                "category": "guild",
+                "name": "Modify Guild Embed",
+                "description": "Modify a guild embed object for the guild. All attributes may be passed in with JSON and modified. Requires the 'MANAGE_GUILD' permission.",
+                "method": "PATCH",
+                "responseNote": "Returns the updated guild embed object.",
+                "responseTypes": [
+                    {
+                        "name": "guild embed",
+                        "type": "guild-embed"
+                    }
+                ],
+                "url": "/guilds/{guild.id}/embed",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "updateNick": {
+                "category": "guild",
+                "name": "Update Current Users' Nickname",
+                "description": "Updates the bots nickname in a server",
+                "method": "PATCH",
+                "responseNote": "Returns the nick",
+                "responseTypes": [],
+                "url": "/guilds/{guild.id}/members/@me/nick",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri"
+                    },
+                    "nick": {
+                        "type": "string",
+                        "description": "Nickname to set",
+                        "location": "json"
+                    }
+                }
+            }
+        },
+        "channel": {
+            "getChannel": {
+                "category": "channel",
+                "name": "Get Channel",
+                "description": "Get a channel by ID.",
+                "method": "GET",
+                "responseNote": "Returns a guild channel or dm channel object.",
+                "responseTypes": [
+                    {
+                        "name": "guild channel",
+                        "type": "guild-channel"
+                    },
+                    {
+                        "name": "dm channel",
+                        "type": "dm-channel"
+                    }
+                ],
+                "url": "/channels/{channel.id}",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "modifyChannel": {
+                "category": "channel",
+                "name": "Modify Channel",
+                "description": "Update a channels settings. Requires the 'MANAGE_GUILD' permission for the guild.  Fires a Channel Update Gateway event. For the PATCH method, all the JSON Params are optional.",
+                "method": "PUT",
+                "responseNote": "Returns a guild channel on success, and a 400 BAD REQUEST on invalid parameters.",
+                "responseTypes": [
+                    {
+                        "name": "guild channel",
+                        "type": "guild-channel"
+                    }
+                ],
+                "url": "/channels/{channel.id}",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "name": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "2-100 character channel name",
+                        "required": false
+                    },
+                    "position": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the position of the channel in the left-hand listing",
+                        "default": null,
+                        "required": false
+                    },
+                    "topic": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "0-1024 character channel topic",
+                        "required": false
+                    },
+                    "bitrate": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the bitrate (in bits) of the voice channel; 8000 to 96000 (128000 for VIP servers)",
+                        "default": null,
+                        "required": false
+                    },
+                    "user_limit": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the user limit of the voice channel; 0 refers to no limit, 1 to 99 refers to a user limit",
+                        "default": null,
+                        "required": false
+                    }
+                }
+            },
+            "deletecloseChannel": {
+                "category": "channel",
+                "name": "Delete/Close Channel",
+                "description": "Delete a guild channel, or close a private message. Requires the 'MANAGE_CHANNELS' permission for the guild.  Fires a Channel Delete Gateway event.",
+                "method": "DELETE",
+                "responseNote": "Returns a guild channel or dm channel object on success.",
+                "responseTypes": [
+                    {
+                        "name": "guild channel",
+                        "type": "guild-channel"
+                    },
+                    {
+                        "name": "dm channel",
+                        "type": "dm-channel"
+                    }
+                ],
+                "url": "/channels/{channel.id}",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "getChannelMessages": {
+                "category": "channel",
+                "name": "Get Channel Messages",
+                "description": "If operating on a guild channel, this endpoint requires the 'READ_MESSAGES' permission to be present on the current user.",
+                "method": "GET",
+                "responseNote": "Returns the messages for a channel.",
+                "responseTypes": [],
+                "url": "/channels/{channel.id}/messages",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "around": {
+                        "location": "query",
+                        "type": "snowflake",
+                        "description": "get messages around this message ID",
+                        "default": "absent",
+                        "required": false
+                    },
+                    "before": {
+                        "location": "query",
+                        "type": "snowflake",
+                        "description": "get messages before this message ID",
+                        "default": "absent",
+                        "required": false
+                    },
+                    "after": {
+                        "location": "query",
+                        "type": "snowflake",
+                        "description": "get messages after this message ID",
+                        "default": "absent",
+                        "required": false
+                    },
+                    "limit": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "max number of messages to return (1-100)",
+                        "default": 50,
+                        "required": false
+                    }
+                }
+            },
+            "getChannelMessage": {
+                "category": "channel",
+                "name": "Get Channel Message",
+                "description": "If operating on a guild channel, this endpoints requires the 'READ_MESSAGE_HISTORY' permission to be present on the current user.",
+                "method": "GET",
+                "responseNote": "Returns a specific message in the channel.",
+                "responseTypes": [],
+                "url": "/channels/{channel.id}/messages/{message.id}",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "message.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "createMessage": {
+                "category": "channel",
+                "name": "Create Message",
+                "description": "Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the 'SEND_MESSAGES' permission to be present on the current user.  Fires a Message Create Gateway event. See message formatting for more information on how to properly format messages.",
+                "method": "POST",
+                "responseNote": "Returns a message object.",
+                "responseTypes": [
+                    {
+                        "name": "message",
+                        "type": "message"
+                    }
+                ],
+                "url": "/channels/{channel.id}/messages",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "content": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "the message contents (up to 2000 characters)",
+                        "required": false
+                    },
+                    "nonce": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "a nonce that can be used for optimistic message sending",
+                        "required": false
+                    },
+                    "tts": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "true if this is a TTS message",
+                        "default": false,
+                        "required": false
+                    },
+                    "file": {
+                        "location": "json",
+                        "type": "file contents",
+                        "description": "the contents of the file being sent",
+                        "required": false
+                    },
+                    "embed": {
+                        "location": "json",
+                        "type": "object",
+                        "description": "embedded rich content",
+                        "required": false
+                    }
+                }
+            },
+            "createReaction": {
+                "category": "channel",
+                "name": "Create Reaction",
+                "description": "Create a reaction for the message. If nobody else has reacted to the message using this emoji, this endpoint requires the 'ADD_REACTIONS' permission to be present on the current user.",
+                "method": "PUT",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/@me",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "message.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "emoji": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "deleteOwnReaction": {
+                "category": "channel",
+                "name": "Delete Own Reaction",
+                "description": "Delete a reaction the current user has made for the message.",
+                "method": "DELETE",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/@me",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "message.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "emoji": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "deleteUserReaction": {
+                "category": "channel",
+                "name": "Delete User Reaction",
+                "description": "Deletes another user's reaction. This endpoint requires the 'MANAGE_MESSAGES' permission to be present on the current user.",
+                "method": "DELETE",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/channels/{channel.id}/messages/{message.id}/reactions/{emoji}/{user.id}",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "message.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "emoji": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "user.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "getReactions": {
+                "category": "channel",
+                "name": "Get Reactions",
+                "description": "Get a list of users that reacted with this emoji.",
+                "method": "GET",
+                "responseNote": "Returns an array of user objects on success.",
+                "responseTypes": [
+                    {
+                        "name": "user",
+                        "type": "user"
+                    }
+                ],
+                "url": "/channels/{channel.id}/messages/{message.id}/reactions/{emoji}",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "message.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "emoji": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "deleteAllReactions": {
+                "category": "channel",
+                "name": "Delete All Reactions",
+                "description": "Deletes all reactions on a message. This endpoint requires the 'MANAGE_MESSAGES' permission to be present on the current user.",
+                "method": "DELETE",
+                "responseTypes": [],
+                "url": "/channels/{channel.id}/messages/{message.id}/reactions",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "message.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "editMessage": {
+                "category": "channel",
+                "name": "Edit Message",
+                "description": "Edit a previously sent message. You can only edit messages that have been sent by the current user.  Fires a Message Update Gateway event.",
+                "method": "PATCH",
+                "responseNote": "Returns a message object.",
+                "responseTypes": [
+                    {
+                        "name": "message",
+                        "type": "message"
+                    }
+                ],
+                "url": "/channels/{channel.id}/messages/{message.id}",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "message.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "content": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "the new message contents",
+                        "required": false
+                    }
+                }
+            },
+            "deleteMessage": {
+                "category": "channel",
+                "name": "Delete Message",
+                "description": "Delete a message. If operating on a guild channel and trying to delete a message that was not sent by the current user, this endpoint requires the 'MANAGE_MESSAGES' permission.  Fires a Message Delete Gateway event.",
+                "method": "DELETE",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/channels/{channel.id}/messages/{message.id}",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "message.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "bulkDeleteMessages": {
+                "category": "channel",
+                "name": "Bulk Delete Messages",
+                "description": "Delete multiple messages in a single request. This endpoint can only be used on guild channels and requires the 'MANAGE_MESSAGES' permission.  Fires multiple Message Delete Gateway events.",
+                "method": "POST",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/channels/{channel.id}/messages/bulk-delete",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "messages": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "an array of message ids to delete",
+                        "required": false
+                    }
+                }
+            },
+            "bulkDeleteMessagesDeprecated": {
+                "category": "channel",
+                "name": "Bulk Delete Messages (deprecated)",
+                "description": "Same as above, but this endpoint is deprecated.",
+                "method": "POST",
+                "responseTypes": [],
+                "url": "/channels/{channel.id}/messages/bulk_delete",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "editChannelPermissions": {
+                "category": "channel",
+                "name": "Edit Channel Permissions",
+                "description": "Edit the channel permission overwrites for a user or role in a channel. Only usable for guild channels. Requires the 'MANAGE_ROLES' permission.  For more information about permissions, see permissions.",
+                "method": "PUT",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/channels/{channel.id}/permissions/{overwrite.id}",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "overwrite.id": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "allow": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the bitwise value of all allowed permissions",
+                        "default": null,
+                        "required": false
+                    },
+                    "deny": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the bitwise value of all disallowed permissions",
+                        "default": null,
+                        "required": false
+                    },
+                    "type": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "\"member\" for a user or \"role\" for a role",
+                        "required": false
+                    }
+                }
+            },
+            "getChannelInvites": {
+                "category": "channel",
+                "name": "Get Channel Invites",
+                "description": "Only usable for guild channels. Requires the 'MANAGE_CHANNELS' permission.",
+                "method": "GET",
+                "responseNote": "Returns a list of invite objects (with invite metadata) for the channel.",
+                "responseTypes": [
+                    {
+                        "name": "invite",
+                        "type": "invite"
+                    },
+                    {
+                        "name": "invite metadata",
+                        "type": "invite-metadata"
+                    }
+                ],
+                "url": "/channels/{channel.id}/invites",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "createChannelInvite": {
+                "category": "channel",
+                "name": "Create Channel Invite",
+                "description": "Create a new invite object for the channel. Only usable for guild channels. Requires the CREATE_INSTANT_INVITE permission. All JSON paramaters for this route are optional, however the request body is not. If you are not sending any fields, you still have to send an empty JSON object ({}).",
+                "method": "POST",
+                "responseNote": "Returns an invite object.",
+                "responseTypes": [
+                    {
+                        "name": "invite",
+                        "type": "invite"
+                    }
+                ],
+                "url": "/channels/{channel.id}/invites",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "max_age": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "duration of invite in seconds before expiry, or 0 for never",
+                        "default": 86400,
+                        "required": false
+                    },
+                    "max_uses": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "max number of uses or 0 for unlimited",
+                        "default": 0,
+                        "required": false
+                    },
+                    "temporary": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether this invite only grants temporary membership",
+                        "default": false,
+                        "required": false
+                    },
+                    "unique": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if true, don't try to reuse a similar invite (useful for creating many unique one time use invites)",
+                        "default": false,
+                        "required": false
+                    }
+                }
+            },
+            "deleteChannelPermission": {
+                "category": "channel",
+                "name": "Delete Channel Permission",
+                "description": "Delete a channel permission overwrite for a user or role in a channel. Only usable for guild channels. Requires the 'MANAGE_ROLES' permission.  For more information about permissions, see permissions",
+                "method": "DELETE",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/channels/{channel.id}/permissions/{overwrite.id}",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "overwrite.id": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "triggerTypingIndicator": {
+                "category": "channel",
+                "name": "Trigger Typing Indicator",
+                "description": "Post a typing indicator for the specified channel. Generally bots should not implement this route. However, if a bot is responding to a command and expects the computation to take a few seconds, this endpoint may be called to let the user know that the bot is processing their message.  Fires a Typing Start Gateway event.",
+                "method": "POST",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/channels/{channel.id}/typing",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "getPinnedMessages": {
+                "category": "channel",
+                "name": "Get Pinned Messages",
+                "description": "",
+                "method": "GET",
+                "responseNote": "Returns all pinned messages in the channel as an array of message objects.",
+                "responseTypes": [
+                    {
+                        "name": "message",
+                        "type": "message"
+                    }
+                ],
+                "url": "/channels/{channel.id}/pins",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "addPinnedChannelMessage": {
+                "category": "channel",
+                "name": "Add Pinned Channel Message",
+                "description": "Pin a message in a channel. Requires the 'MANAGE_MESSAGES' permission.",
+                "method": "PUT",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/channels/{channel.id}/pins/{message.id}",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "message.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "deletePinnedChannelMessage": {
+                "category": "channel",
+                "name": "Delete Pinned Channel Message",
+                "description": "Delete a pinned message in a channel. Requires the 'MANAGE_MESSAGES' permission.",
+                "method": "DELETE",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/channels/{channel.id}/pins/{message.id}",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "message.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "groupDmAddRecipient": {
+                "category": "channel",
+                "name": "Group DM Add Recipient",
+                "description": "Adds a recipient to a Group DM using their access token",
+                "method": "PUT",
+                "responseTypes": [],
+                "url": "/channels/{channel.id}/recipients/{user.id}",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "user.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "access_token": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "access token of a user that has granted your app the gdm.join scope",
+                        "required": false
+                    },
+                    "nick": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "nickname of the user being added",
+                        "required": false
+                    }
+                }
+            },
+            "groupDmRemoveRecipient": {
+                "category": "channel",
+                "name": "Group DM Remove Recipient",
+                "description": "Removes a recipient from a Group DM",
+                "method": "DELETE",
+                "responseTypes": [],
+                "url": "/channels/{channel.id}/recipients/{user.id}",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "user.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            }
+        },
+        "invite": {
+            "getInvite": {
+                "category": "invite",
+                "name": "Get Invite",
+                "description": "",
+                "method": "GET",
+                "responseNote": "Returns an invite object for the given code.",
+                "responseTypes": [
+                    {
+                        "name": "invite object",
+                        "type": "invite"
+                    }
+                ],
+                "url": "/invites/{invite.code}",
+                "parameters": {
+                    "invite.code": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "deleteInvite": {
+                "category": "invite",
+                "name": "Delete Invite",
+                "description": "Delete an invite. Requires the MANAGE_CHANNELS permission.",
+                "method": "DELETE",
+                "responseNote": "Returns an invite object on success.",
+                "responseTypes": [
+                    {
+                        "name": "invite object",
+                        "type": "invite"
+                    }
+                ],
+                "url": "/invites/{invite.code}",
+                "parameters": {
+                    "invite.code": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "acceptInvite": {
+                "category": "invite",
+                "name": "Accept Invite",
+                "description": "Accept an invite. This is not available to bot accounts, and requires the guilds.join OAuth2 scope to accept on behalf of normal users.",
+                "method": "POST",
+                "responseNote": "Returns an invite object on success.",
+                "responseTypes": [
+                    {
+                        "name": "invite object",
+                        "type": "invite"
+                    }
+                ],
+                "url": "/invites/{invite.code}",
+                "parameters": {
+                    "invite.code": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            }
+        },
+        "user": {
+            "getCurrentUser": {
+                "category": "user",
+                "name": "Get Current User",
+                "description": "For OAuth2, this requires the identify scope, which will return the object without an email, and optionally the email scope, which returns the object with an email.",
+                "method": "GET",
+                "responseNote": "Returns the user object of the requester's account.",
+                "responseTypes": [
+                    {
+                        "name": "user",
+                        "type": "user"
+                    }
+                ],
+                "url": "/users//@me",
+                "parameters": {}
+            },
+            "getUser": {
+                "category": "user",
+                "name": "Get User",
+                "description": "",
+                "method": "GET",
+                "responseNote": "Returns a user for a given user ID.",
+                "responseTypes": [
+                    {
+                        "name": "user",
+                        "type": "user"
+                    }
+                ],
+                "url": "/users/{user.id}",
+                "parameters": {
+                    "user.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "modifyCurrentUser": {
+                "category": "user",
+                "name": "Modify Current User",
+                "description": "Modify the requestors user account settings.",
+                "method": "PATCH",
+                "responseNote": "Returns a user object on success.",
+                "responseTypes": [
+                    {
+                        "name": "user",
+                        "type": "user"
+                    }
+                ],
+                "url": "/users//@me",
+                "parameters": {
+                    "username": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "users username, if changed may cause the users discriminator to be randomized.",
+                        "required": false
+                    },
+                    "avatar": {
+                        "location": "json",
+                        "type": "avatar data",
+                        "description": "if passed, modifies the user's avatar",
+                        "required": false
+                    }
+                }
+            },
+            "getCurrentUserGuilds": {
+                "category": "user",
+                "name": "Get Current User Guilds",
+                "description": "Requires the guilds OAuth2 scope.",
+                "method": "GET",
+                "responseNote": "Returns a list of user guild objects the current user is a member of.",
+                "responseTypes": [
+                    {
+                        "name": "user guild",
+                        "type": "user-guild"
+                    }
+                ],
+                "url": "/users//@me",
+                "parameters": {
+                    "before": {
+                        "location": "query",
+                        "type": "snowflake",
+                        "description": "get guilds before this guild ID",
+                        "default": "absent",
+                        "required": false
+                    },
+                    "after": {
+                        "location": "query",
+                        "type": "snowflake",
+                        "description": "get guilds after this guild ID",
+                        "default": "absent",
+                        "required": false
+                    },
+                    "limit": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "max number of guilds to return (1-100)",
+                        "default": 100,
+                        "required": false
+                    }
+                }
+            },
+            "leaveGuild": {
+                "category": "user",
+                "name": "Leave Guild",
+                "description": "Leave a guild.",
+                "method": "DELETE",
+                "responseNote": "Returns a 204 empty response on success.",
+                "responseTypes": [],
+                "url": "/users//@me",
+                "parameters": {}
+            },
+            "getUserDms": {
+                "category": "user",
+                "name": "Get User DMs",
+                "description": "",
+                "method": "GET",
+                "responseNote": "Returns a list of DM channel objects.",
+                "responseTypes": [
+                    {
+                        "name": "DM",
+                        "type": "dm-channel"
+                    }
+                ],
+                "url": "/users//@me",
+                "parameters": {}
+            },
+            "createDm": {
+                "category": "user",
+                "name": "Create DM",
+                "description": "Create a new DM channel with a user.",
+                "method": "POST",
+                "responseNote": "Returns a DM channel object.",
+                "responseTypes": [
+                    {
+                        "name": "DM channel",
+                        "type": "dm-channel"
+                    }
+                ],
+                "url": "/users//@me",
+                "parameters": {
+                    "recipient_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "the recipient to open a DM channel with",
+                        "required": false
+                    }
+                }
+            },
+            "createGroupDm": {
+                "category": "user",
+                "name": "Create Group DM",
+                "description": "Create a new group DM channel with multiple users.",
+                "method": "POST",
+                "responseNote": "Returns a DM channel object.",
+                "responseTypes": [
+                    {
+                        "name": "DM channel",
+                        "type": "dm-channel"
+                    }
+                ],
+                "url": "/users//@me",
+                "parameters": {
+                    "access_tokens": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "access tokens of users that have granted your app the gdm.join scope",
+                        "required": false
+                    },
+                    "nicks": {
+                        "location": "json",
+                        "type": "dict",
+                        "description": "a dictionary of user ids to their respective nicknames",
+                        "required": false
+                    }
+                }
+            },
+            "getUsersConnections": {
+                "category": "user",
+                "name": "Get Users Connections",
+                "description": "Requires the connections OAuth2 scope.",
+                "method": "GET",
+                "responseNote": "Returns a list of connection objects.",
+                "responseTypes": [
+                    {
+                        "name": "connection",
+                        "type": "connection"
+                    }
+                ],
+                "url": "/users//@me",
+                "parameters": {}
+            }
+        },
+        "voice": {
+            "listVoiceRegions": {
+                "category": "voice",
+                "name": "List Voice Regions",
+                "description": "",
+                "method": "GET",
+                "responseNote": "Returns an array of voice region objects that can be used when creating servers.",
+                "responseTypes": [
+                    {
+                        "name": "voice region",
+                        "type": "voice-region"
+                    }
+                ],
+                "url": "/voice/regions",
+                "parameters": {}
+            }
+        },
+        "webhook": {
+            "createWebhook": {
+                "category": "webhook",
+                "name": "Create Webhook",
+                "description": "Create a new webhook.",
+                "method": "POST",
+                "responseNote": "Returns a webhook object on success.",
+                "responseTypes": [
+                    {
+                        "name": "webhook",
+                        "type": "webhook"
+                    }
+                ],
+                "url": "/channels/{channel.id}/webhooks",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "name": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "name of the webhook (2-100 characters)",
+                        "required": false
+                    },
+                    "avatar": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the default webhook avatar",
+                        "required": false
+                    }
+                }
+            },
+            "getChannelWebhooks": {
+                "category": "webhook",
+                "name": "Get Channel Webhooks",
+                "description": "",
+                "method": "GET",
+                "responseNote": "Returns a list of channel webhook objects.",
+                "responseTypes": [
+                    {
+                        "name": "webhook",
+                        "type": "webhook"
+                    }
+                ],
+                "url": "/channels/{channel.id}/webhooks",
+                "parameters": {
+                    "channel.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "getGuildWebhooks": {
+                "category": "webhook",
+                "name": "Get Guild Webhooks",
+                "description": "",
+                "method": "GET",
+                "responseNote": "Returns a list of guild webhook objects.",
+                "responseTypes": [
+                    {
+                        "name": "webhook",
+                        "type": "webhook"
+                    }
+                ],
+                "url": "/guilds/{guild.id}/webhooks",
+                "parameters": {
+                    "guild.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "getWebhook": {
+                "category": "webhook",
+                "name": "Get Webhook",
+                "description": "",
+                "method": "GET",
+                "responseNote": "Returns the new webhook object for the given id.",
+                "responseTypes": [
+                    {
+                        "name": "webhook",
+                        "type": "webhook"
+                    }
+                ],
+                "url": "/webhooks/{webhook.id}",
+                "parameters": {
+                    "webhook.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "getWebhookWithToken": {
+                "category": "webhook",
+                "name": "Get Webhook with Token",
+                "description": "Same as above, except this call does not require authentication and returns no user in the webhook object.",
+                "method": "GET",
+                "responseTypes": [],
+                "url": "/webhooks/{webhook.id}/{webhook.token}",
+                "parameters": {
+                    "webhook.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "webhook.token": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "modifyWebhook": {
+                "category": "webhook",
+                "name": "Modify Webhook",
+                "description": "Modify a webhook.",
+                "method": "PATCH",
+                "responseNote": "Returns the updated webhook object on success.",
+                "responseTypes": [
+                    {
+                        "name": "webhook",
+                        "type": "webhook"
+                    }
+                ],
+                "url": "/webhooks/{webhook.id}",
+                "parameters": {
+                    "webhook.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "name": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "the default name of the webhook",
+                        "required": false
+                    },
+                    "avatar": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the default webhook avatar",
+                        "required": false
+                    }
+                }
+            },
+            "modifyWebhookWithToken": {
+                "category": "webhook",
+                "name": "Modify Webhook with Token",
+                "description": "Same as above, except this call does not require authentication and returns no user in the webhook object.",
+                "method": "PATCH",
+                "responseTypes": [],
+                "url": "/webhooks/{webhook.id}/{webhook.token}",
+                "parameters": {
+                    "webhook.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "webhook.token": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "deleteWebhook": {
+                "category": "webhook",
+                "name": "Delete Webhook",
+                "description": "Delete a webhook permanently. User must be owner.",
+                "method": "DELETE",
+                "responseNote": "Returns a 204 NO CONTENT response on success.",
+                "responseTypes": [],
+                "url": "/webhooks/{webhook.id}",
+                "parameters": {
+                    "webhook.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "deleteWebhookWithToken": {
+                "category": "webhook",
+                "name": "Delete Webhook with Token",
+                "description": "Same as above, except this call does not require authentication.",
+                "method": "DELETE",
+                "responseTypes": [],
+                "url": "/webhooks/{webhook.id}/{webhook.token}",
+                "parameters": {
+                    "webhook.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "webhook.token": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    }
+                }
+            },
+            "executeWebhook": {
+                "category": "webhook",
+                "name": "Execute Webhook",
+                "description": "This endpoint supports both JSON and form data bodies. It does require multipart/form-data requests instead of the normal JSON request type when uploading files. Make sure you set your Content-Type to multipart/form-data if you're doing that. Note that in that case, the embeds field cannot be used, but you can pass an url-encoded JSON body as a form value for payload_json.",
+                "method": "POST",
+                "responseTypes": [],
+                "url": "/webhooks/{webhook.id}/{webhook.token}",
+                "parameters": {
+                    "webhook.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "webhook.token": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "wait": {
+                        "location": "query",
+                        "type": "bool",
+                        "description": "waits for server confirmation of message send before response, and returns the created message body (defaults to false; when false a message that is not saved does not return an error)",
+                        "default": false,
+                        "required": false
+                    },
+                    "content": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "the message contents (up to 2000 characters)",
+                        "required": false
+                    },
+                    "username": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "override the default username of the webhook",
+                        "required": false
+                    },
+                    "avatar_url": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "override the default avatar of the webhook",
+                        "required": false
+                    },
+                    "tts": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "true if this is a TTS message",
+                        "default": false,
+                        "required": false
+                    },
+                    "file": {
+                        "location": "json",
+                        "type": "file contents",
+                        "description": "the contents of the file being sent",
+                        "required": false
+                    },
+                    "embeds": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "embedded rich content",
+                        "required": false
+                    }
+                }
+            },
+            "executeSlackcompatibleWebhook": {
+                "category": "webhook",
+                "name": "Execute Slack-Compatible Webhook",
+                "description": "Refer to Slack's documentation for more information. We do not support Slack's channel, icon_emoji, mrkdwn, or mrkdwn_in properties.",
+                "method": "POST",
+                "responseTypes": [],
+                "url": "/webhooks/{webhook.id}/{webhook.token}/slack",
+                "parameters": {
+                    "webhook.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "webhook.token": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "wait": {
+                        "location": "query",
+                        "type": "bool",
+                        "description": "waits for server confirmation of message send before response (defaults to true; when false a message that is not saved does not return an error)",
+                        "default": false,
+                        "required": false
+                    }
+                }
+            },
+            "executeGithubcompatibleWebhook": {
+                "category": "webhook",
+                "name": "Execute GitHub-Compatible Webhook",
+                "description": "Add a new webhook to your GitHub repo (in the repo's settings), and use this endpoint as the \"Payload URL.\" You can choose what events your Discord channel receives by choosing the \"Let me select individual events\" option and selecting individual events for the new webhook you're configuring.",
+                "method": "POST",
+                "responseTypes": [],
+                "url": "/webhooks/{webhook.id}/{webhook.token}/github",
+                "parameters": {
+                    "webhook.id": {
+                        "type": "snowflake",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "webhook.token": {
+                        "type": "string",
+                        "location": "uri",
+                        "required": true
+                    },
+                    "wait": {
+                        "location": "query",
+                        "type": "bool",
+                        "description": "waits for server confirmation of message send before response (defaults to true; when false a message that is not saved does not return an error)",
+                        "default": false,
+                        "required": false
+                    }
+                }
+            }
+        },
+        "gateway": {
+            "getGateway": {
+                "category": "gateway",
+                "name": "Get Gateway",
+                "description": "Clients should cache this value and only call this endpoint to retrieve a new URL if they are unable to properly establish a connection using the cached version of the URL.",
+                "method": "GET",
+                "responseNote": "Returns an object with a single valid WSS URL, which the client can use as a basis for Connecting.",
+                "responseTypes": [],
+                "url": "/gateway",
+                "parameters": {}
+            },
+            "getGatewayBot": {
+                "category": "gateway",
+                "name": "Get Gateway Bot",
+                "description": "Bots that want to dynamically/automatically spawn shard processes should use this endpoint to determine the number of processes to run. This route should be called once when starting up numerous shards, with the response being cached and passed to all sub-shards/processes. Unlike the Get Gateway, this route should not be cached for extended periods of time as the value is not guaranteed to be the same per-call, and changes as the bot joins/leaves guilds.",
+                "method": "GET",
+                "responseNote": "Returns an object with the same information as Get Gateway, plus a shards key, containing the recommended number of shards to connect with (as an integer).",
+                "responseTypes": [],
+                "url": "/gateway/bot",
+                "parameters": {}
+            }
+        },
+        "oauth2": {
+            "getCurrentApplicationInformation": {
+                "category": "oauth2",
+                "name": "Get Current Application Information",
+                "description": "",
+                "method": "GET",
+                "responseNote": "Returns the bot's OAuth2 application info.",
+                "responseTypes": [],
+                "url": "/@me",
+                "parameters": {}
+            }
+        }
+    },
+    "models": {
+        "guild": {
+            "guild": {
+                "category": "guild",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "name of the role",
+                        "required": false
+                    },
+                    "region": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "guild {voice_region.id}",
+                        "required": false
+                    },
+                    "icon": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the guild icon",
+                        "required": false
+                    },
+                    "verification_level": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "guild verification level",
+                        "default": null,
+                        "required": false
+                    },
+                    "default_message_notifications": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "default message notifications setting",
+                        "default": null,
+                        "required": false
+                    },
+                    "roles": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "array of roles the member is assigned",
+                        "required": false
+                    },
+                    "channels": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "new guild's channels",
+                        "required": false
+                    },
+                    "afk_channel_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "id for afk channel",
+                        "required": false
+                    },
+                    "afk_timeout": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "afk timeout in seconds",
+                        "default": null,
+                        "required": false
+                    },
+                    "owner_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "user id to transfer guild ownership to (must be owner)",
+                        "required": false
+                    },
+                    "splash": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the guild splash (VIP only)",
+                        "required": false
+                    },
+                    "type": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "the integration type",
+                        "required": false
+                    },
+                    "bitrate": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the bitrate (in bits) of the voice channel (voice only)",
+                        "default": null,
+                        "required": false
+                    },
+                    "user_limit": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the user limit of the voice channel (voice only)",
+                        "default": null,
+                        "required": false
+                    },
+                    "permission_overwrites": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "the channel's permission overwrites",
+                        "required": false
+                    },
+                    "id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "the integration id",
+                        "required": false
+                    },
+                    "position": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "sorting position of the role",
+                        "default": null,
+                        "required": false
+                    },
+                    "limit": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "max number of members to return (1-1000)",
+                        "default": 1,
+                        "required": false
+                    },
+                    "after": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "the highest user id in the previous page",
+                        "default": 0,
+                        "required": false
+                    },
+                    "access_token": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "an oauth2 access token granted with the guilds.join to the bot's application for the user you want to add to the guild",
+                        "required": false
+                    },
+                    "nick": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "value to set users nickname to",
+                        "required": false
+                    },
+                    "mute": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is muted",
+                        "default": false,
+                        "required": false
+                    },
+                    "deaf": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is deafened",
+                        "default": false,
+                        "required": false
+                    },
+                    "channel_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "id of channel to move user to (if they are connected to voice)",
+                        "required": false
+                    },
+                    "delete-message-days": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "number of days to delete messages for (0-7)",
+                        "default": null,
+                        "required": false
+                    },
+                    "permissions": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "bitwise of the enabled/disabled permissions",
+                        "default": null,
+                        "required": false
+                    },
+                    "color": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "RGB color value",
+                        "default": null,
+                        "required": false
+                    },
+                    "hoist": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be displayed separately in the sidebar",
+                        "default": false,
+                        "required": false
+                    },
+                    "mentionable": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be mentionable",
+                        "default": false,
+                        "required": false
+                    },
+                    "days": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "number of days to prune (1 or more)",
+                        "default": null,
+                        "required": false
+                    },
+                    "expire_behavior": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the behavior when an integration subscription lapses (see the integration object documentation)",
+                        "default": null,
+                        "required": false
+                    },
+                    "expire_grace_period": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "period (in seconds) where the integration will ignore lapsed subscriptions",
+                        "default": null,
+                        "required": false
+                    },
+                    "enable_emoticons": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether emoticons should be synced for this integration (twitch only currently)",
+                        "default": false,
+                        "required": false
+                    }
+                }
+            },
+            "unavailableGuild": {
+                "category": "guild",
+                "description": "Represents an Offline Guild, or a Guild whose information has not been provided through Guild Create events during the Gateway connect.",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "name of the role",
+                        "required": false
+                    },
+                    "region": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "guild {voice_region.id}",
+                        "required": false
+                    },
+                    "icon": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the guild icon",
+                        "required": false
+                    },
+                    "verification_level": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "guild verification level",
+                        "default": null,
+                        "required": false
+                    },
+                    "default_message_notifications": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "default message notifications setting",
+                        "default": null,
+                        "required": false
+                    },
+                    "roles": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "array of roles the member is assigned",
+                        "required": false
+                    },
+                    "channels": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "new guild's channels",
+                        "required": false
+                    },
+                    "afk_channel_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "id for afk channel",
+                        "required": false
+                    },
+                    "afk_timeout": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "afk timeout in seconds",
+                        "default": null,
+                        "required": false
+                    },
+                    "owner_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "user id to transfer guild ownership to (must be owner)",
+                        "required": false
+                    },
+                    "splash": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the guild splash (VIP only)",
+                        "required": false
+                    },
+                    "type": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "the integration type",
+                        "required": false
+                    },
+                    "bitrate": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the bitrate (in bits) of the voice channel (voice only)",
+                        "default": null,
+                        "required": false
+                    },
+                    "user_limit": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the user limit of the voice channel (voice only)",
+                        "default": null,
+                        "required": false
+                    },
+                    "permission_overwrites": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "the channel's permission overwrites",
+                        "required": false
+                    },
+                    "id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "the integration id",
+                        "required": false
+                    },
+                    "position": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "sorting position of the role",
+                        "default": null,
+                        "required": false
+                    },
+                    "limit": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "max number of members to return (1-1000)",
+                        "default": 1,
+                        "required": false
+                    },
+                    "after": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "the highest user id in the previous page",
+                        "default": 0,
+                        "required": false
+                    },
+                    "access_token": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "an oauth2 access token granted with the guilds.join to the bot's application for the user you want to add to the guild",
+                        "required": false
+                    },
+                    "nick": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "value to set users nickname to",
+                        "required": false
+                    },
+                    "mute": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is muted",
+                        "default": false,
+                        "required": false
+                    },
+                    "deaf": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is deafened",
+                        "default": false,
+                        "required": false
+                    },
+                    "channel_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "id of channel to move user to (if they are connected to voice)",
+                        "required": false
+                    },
+                    "delete-message-days": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "number of days to delete messages for (0-7)",
+                        "default": null,
+                        "required": false
+                    },
+                    "permissions": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "bitwise of the enabled/disabled permissions",
+                        "default": null,
+                        "required": false
+                    },
+                    "color": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "RGB color value",
+                        "default": null,
+                        "required": false
+                    },
+                    "hoist": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be displayed separately in the sidebar",
+                        "default": false,
+                        "required": false
+                    },
+                    "mentionable": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be mentionable",
+                        "default": false,
+                        "required": false
+                    },
+                    "days": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "number of days to prune (1 or more)",
+                        "default": null,
+                        "required": false
+                    },
+                    "expire_behavior": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the behavior when an integration subscription lapses (see the integration object documentation)",
+                        "default": null,
+                        "required": false
+                    },
+                    "expire_grace_period": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "period (in seconds) where the integration will ignore lapsed subscriptions",
+                        "default": null,
+                        "required": false
+                    },
+                    "enable_emoticons": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether emoticons should be synced for this integration (twitch only currently)",
+                        "default": false,
+                        "required": false
+                    }
+                }
+            },
+            "guildEmbed": {
+                "category": "guild",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "name of the role",
+                        "required": false
+                    },
+                    "region": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "guild {voice_region.id}",
+                        "required": false
+                    },
+                    "icon": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the guild icon",
+                        "required": false
+                    },
+                    "verification_level": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "guild verification level",
+                        "default": null,
+                        "required": false
+                    },
+                    "default_message_notifications": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "default message notifications setting",
+                        "default": null,
+                        "required": false
+                    },
+                    "roles": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "array of roles the member is assigned",
+                        "required": false
+                    },
+                    "channels": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "new guild's channels",
+                        "required": false
+                    },
+                    "afk_channel_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "id for afk channel",
+                        "required": false
+                    },
+                    "afk_timeout": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "afk timeout in seconds",
+                        "default": null,
+                        "required": false
+                    },
+                    "owner_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "user id to transfer guild ownership to (must be owner)",
+                        "required": false
+                    },
+                    "splash": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the guild splash (VIP only)",
+                        "required": false
+                    },
+                    "type": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "the integration type",
+                        "required": false
+                    },
+                    "bitrate": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the bitrate (in bits) of the voice channel (voice only)",
+                        "default": null,
+                        "required": false
+                    },
+                    "user_limit": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the user limit of the voice channel (voice only)",
+                        "default": null,
+                        "required": false
+                    },
+                    "permission_overwrites": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "the channel's permission overwrites",
+                        "required": false
+                    },
+                    "id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "the integration id",
+                        "required": false
+                    },
+                    "position": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "sorting position of the role",
+                        "default": null,
+                        "required": false
+                    },
+                    "limit": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "max number of members to return (1-1000)",
+                        "default": 1,
+                        "required": false
+                    },
+                    "after": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "the highest user id in the previous page",
+                        "default": 0,
+                        "required": false
+                    },
+                    "access_token": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "an oauth2 access token granted with the guilds.join to the bot's application for the user you want to add to the guild",
+                        "required": false
+                    },
+                    "nick": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "value to set users nickname to",
+                        "required": false
+                    },
+                    "mute": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is muted",
+                        "default": false,
+                        "required": false
+                    },
+                    "deaf": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is deafened",
+                        "default": false,
+                        "required": false
+                    },
+                    "channel_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "id of channel to move user to (if they are connected to voice)",
+                        "required": false
+                    },
+                    "delete-message-days": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "number of days to delete messages for (0-7)",
+                        "default": null,
+                        "required": false
+                    },
+                    "permissions": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "bitwise of the enabled/disabled permissions",
+                        "default": null,
+                        "required": false
+                    },
+                    "color": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "RGB color value",
+                        "default": null,
+                        "required": false
+                    },
+                    "hoist": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be displayed separately in the sidebar",
+                        "default": false,
+                        "required": false
+                    },
+                    "mentionable": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be mentionable",
+                        "default": false,
+                        "required": false
+                    },
+                    "days": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "number of days to prune (1 or more)",
+                        "default": null,
+                        "required": false
+                    },
+                    "expire_behavior": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the behavior when an integration subscription lapses (see the integration object documentation)",
+                        "default": null,
+                        "required": false
+                    },
+                    "expire_grace_period": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "period (in seconds) where the integration will ignore lapsed subscriptions",
+                        "default": null,
+                        "required": false
+                    },
+                    "enable_emoticons": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether emoticons should be synced for this integration (twitch only currently)",
+                        "default": false,
+                        "required": false
+                    }
+                }
+            },
+            "guildMember": {
+                "category": "guild",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "name of the role",
+                        "required": false
+                    },
+                    "region": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "guild {voice_region.id}",
+                        "required": false
+                    },
+                    "icon": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the guild icon",
+                        "required": false
+                    },
+                    "verification_level": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "guild verification level",
+                        "default": null,
+                        "required": false
+                    },
+                    "default_message_notifications": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "default message notifications setting",
+                        "default": null,
+                        "required": false
+                    },
+                    "roles": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "array of roles the member is assigned",
+                        "required": false
+                    },
+                    "channels": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "new guild's channels",
+                        "required": false
+                    },
+                    "afk_channel_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "id for afk channel",
+                        "required": false
+                    },
+                    "afk_timeout": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "afk timeout in seconds",
+                        "default": null,
+                        "required": false
+                    },
+                    "owner_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "user id to transfer guild ownership to (must be owner)",
+                        "required": false
+                    },
+                    "splash": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the guild splash (VIP only)",
+                        "required": false
+                    },
+                    "type": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "the integration type",
+                        "required": false
+                    },
+                    "bitrate": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the bitrate (in bits) of the voice channel (voice only)",
+                        "default": null,
+                        "required": false
+                    },
+                    "user_limit": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the user limit of the voice channel (voice only)",
+                        "default": null,
+                        "required": false
+                    },
+                    "permission_overwrites": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "the channel's permission overwrites",
+                        "required": false
+                    },
+                    "id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "the integration id",
+                        "required": false
+                    },
+                    "position": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "sorting position of the role",
+                        "default": null,
+                        "required": false
+                    },
+                    "limit": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "max number of members to return (1-1000)",
+                        "default": 1,
+                        "required": false
+                    },
+                    "after": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "the highest user id in the previous page",
+                        "default": 0,
+                        "required": false
+                    },
+                    "access_token": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "an oauth2 access token granted with the guilds.join to the bot's application for the user you want to add to the guild",
+                        "required": false
+                    },
+                    "nick": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "value to set users nickname to",
+                        "required": false
+                    },
+                    "mute": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is muted",
+                        "default": false,
+                        "required": false
+                    },
+                    "deaf": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is deafened",
+                        "default": false,
+                        "required": false
+                    },
+                    "channel_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "id of channel to move user to (if they are connected to voice)",
+                        "required": false
+                    },
+                    "delete-message-days": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "number of days to delete messages for (0-7)",
+                        "default": null,
+                        "required": false
+                    },
+                    "permissions": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "bitwise of the enabled/disabled permissions",
+                        "default": null,
+                        "required": false
+                    },
+                    "color": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "RGB color value",
+                        "default": null,
+                        "required": false
+                    },
+                    "hoist": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be displayed separately in the sidebar",
+                        "default": false,
+                        "required": false
+                    },
+                    "mentionable": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be mentionable",
+                        "default": false,
+                        "required": false
+                    },
+                    "days": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "number of days to prune (1 or more)",
+                        "default": null,
+                        "required": false
+                    },
+                    "expire_behavior": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the behavior when an integration subscription lapses (see the integration object documentation)",
+                        "default": null,
+                        "required": false
+                    },
+                    "expire_grace_period": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "period (in seconds) where the integration will ignore lapsed subscriptions",
+                        "default": null,
+                        "required": false
+                    },
+                    "enable_emoticons": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether emoticons should be synced for this integration (twitch only currently)",
+                        "default": false,
+                        "required": false
+                    }
+                }
+            },
+            "integration": {
+                "category": "guild",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "name of the role",
+                        "required": false
+                    },
+                    "region": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "guild {voice_region.id}",
+                        "required": false
+                    },
+                    "icon": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the guild icon",
+                        "required": false
+                    },
+                    "verification_level": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "guild verification level",
+                        "default": null,
+                        "required": false
+                    },
+                    "default_message_notifications": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "default message notifications setting",
+                        "default": null,
+                        "required": false
+                    },
+                    "roles": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "array of roles the member is assigned",
+                        "required": false
+                    },
+                    "channels": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "new guild's channels",
+                        "required": false
+                    },
+                    "afk_channel_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "id for afk channel",
+                        "required": false
+                    },
+                    "afk_timeout": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "afk timeout in seconds",
+                        "default": null,
+                        "required": false
+                    },
+                    "owner_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "user id to transfer guild ownership to (must be owner)",
+                        "required": false
+                    },
+                    "splash": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the guild splash (VIP only)",
+                        "required": false
+                    },
+                    "type": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "the integration type",
+                        "required": false
+                    },
+                    "bitrate": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the bitrate (in bits) of the voice channel (voice only)",
+                        "default": null,
+                        "required": false
+                    },
+                    "user_limit": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the user limit of the voice channel (voice only)",
+                        "default": null,
+                        "required": false
+                    },
+                    "permission_overwrites": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "the channel's permission overwrites",
+                        "required": false
+                    },
+                    "id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "the integration id",
+                        "required": false
+                    },
+                    "position": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "sorting position of the role",
+                        "default": null,
+                        "required": false
+                    },
+                    "limit": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "max number of members to return (1-1000)",
+                        "default": 1,
+                        "required": false
+                    },
+                    "after": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "the highest user id in the previous page",
+                        "default": 0,
+                        "required": false
+                    },
+                    "access_token": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "an oauth2 access token granted with the guilds.join to the bot's application for the user you want to add to the guild",
+                        "required": false
+                    },
+                    "nick": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "value to set users nickname to",
+                        "required": false
+                    },
+                    "mute": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is muted",
+                        "default": false,
+                        "required": false
+                    },
+                    "deaf": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is deafened",
+                        "default": false,
+                        "required": false
+                    },
+                    "channel_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "id of channel to move user to (if they are connected to voice)",
+                        "required": false
+                    },
+                    "delete-message-days": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "number of days to delete messages for (0-7)",
+                        "default": null,
+                        "required": false
+                    },
+                    "permissions": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "bitwise of the enabled/disabled permissions",
+                        "default": null,
+                        "required": false
+                    },
+                    "color": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "RGB color value",
+                        "default": null,
+                        "required": false
+                    },
+                    "hoist": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be displayed separately in the sidebar",
+                        "default": false,
+                        "required": false
+                    },
+                    "mentionable": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be mentionable",
+                        "default": false,
+                        "required": false
+                    },
+                    "days": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "number of days to prune (1 or more)",
+                        "default": null,
+                        "required": false
+                    },
+                    "expire_behavior": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the behavior when an integration subscription lapses (see the integration object documentation)",
+                        "default": null,
+                        "required": false
+                    },
+                    "expire_grace_period": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "period (in seconds) where the integration will ignore lapsed subscriptions",
+                        "default": null,
+                        "required": false
+                    },
+                    "enable_emoticons": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether emoticons should be synced for this integration (twitch only currently)",
+                        "default": false,
+                        "required": false
+                    }
+                }
+            },
+            "integrationAccount": {
+                "category": "guild",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "name of the role",
+                        "required": false
+                    },
+                    "region": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "guild {voice_region.id}",
+                        "required": false
+                    },
+                    "icon": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the guild icon",
+                        "required": false
+                    },
+                    "verification_level": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "guild verification level",
+                        "default": null,
+                        "required": false
+                    },
+                    "default_message_notifications": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "default message notifications setting",
+                        "default": null,
+                        "required": false
+                    },
+                    "roles": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "array of roles the member is assigned",
+                        "required": false
+                    },
+                    "channels": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "new guild's channels",
+                        "required": false
+                    },
+                    "afk_channel_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "id for afk channel",
+                        "required": false
+                    },
+                    "afk_timeout": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "afk timeout in seconds",
+                        "default": null,
+                        "required": false
+                    },
+                    "owner_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "user id to transfer guild ownership to (must be owner)",
+                        "required": false
+                    },
+                    "splash": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the guild splash (VIP only)",
+                        "required": false
+                    },
+                    "type": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "the integration type",
+                        "required": false
+                    },
+                    "bitrate": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the bitrate (in bits) of the voice channel (voice only)",
+                        "default": null,
+                        "required": false
+                    },
+                    "user_limit": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the user limit of the voice channel (voice only)",
+                        "default": null,
+                        "required": false
+                    },
+                    "permission_overwrites": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "the channel's permission overwrites",
+                        "required": false
+                    },
+                    "id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "the integration id",
+                        "required": false
+                    },
+                    "position": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "sorting position of the role",
+                        "default": null,
+                        "required": false
+                    },
+                    "limit": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "max number of members to return (1-1000)",
+                        "default": 1,
+                        "required": false
+                    },
+                    "after": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "the highest user id in the previous page",
+                        "default": 0,
+                        "required": false
+                    },
+                    "access_token": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "an oauth2 access token granted with the guilds.join to the bot's application for the user you want to add to the guild",
+                        "required": false
+                    },
+                    "nick": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "value to set users nickname to",
+                        "required": false
+                    },
+                    "mute": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is muted",
+                        "default": false,
+                        "required": false
+                    },
+                    "deaf": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is deafened",
+                        "default": false,
+                        "required": false
+                    },
+                    "channel_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "id of channel to move user to (if they are connected to voice)",
+                        "required": false
+                    },
+                    "delete-message-days": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "number of days to delete messages for (0-7)",
+                        "default": null,
+                        "required": false
+                    },
+                    "permissions": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "bitwise of the enabled/disabled permissions",
+                        "default": null,
+                        "required": false
+                    },
+                    "color": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "RGB color value",
+                        "default": null,
+                        "required": false
+                    },
+                    "hoist": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be displayed separately in the sidebar",
+                        "default": false,
+                        "required": false
+                    },
+                    "mentionable": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be mentionable",
+                        "default": false,
+                        "required": false
+                    },
+                    "days": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "number of days to prune (1 or more)",
+                        "default": null,
+                        "required": false
+                    },
+                    "expire_behavior": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the behavior when an integration subscription lapses (see the integration object documentation)",
+                        "default": null,
+                        "required": false
+                    },
+                    "expire_grace_period": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "period (in seconds) where the integration will ignore lapsed subscriptions",
+                        "default": null,
+                        "required": false
+                    },
+                    "enable_emoticons": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether emoticons should be synced for this integration (twitch only currently)",
+                        "default": false,
+                        "required": false
+                    }
+                }
+            },
+            "emoji": {
+                "category": "guild",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "name of the role",
+                        "required": false
+                    },
+                    "region": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "guild {voice_region.id}",
+                        "required": false
+                    },
+                    "icon": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the guild icon",
+                        "required": false
+                    },
+                    "verification_level": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "guild verification level",
+                        "default": null,
+                        "required": false
+                    },
+                    "default_message_notifications": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "default message notifications setting",
+                        "default": null,
+                        "required": false
+                    },
+                    "roles": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "array of roles the member is assigned",
+                        "required": false
+                    },
+                    "channels": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "new guild's channels",
+                        "required": false
+                    },
+                    "afk_channel_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "id for afk channel",
+                        "required": false
+                    },
+                    "afk_timeout": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "afk timeout in seconds",
+                        "default": null,
+                        "required": false
+                    },
+                    "owner_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "user id to transfer guild ownership to (must be owner)",
+                        "required": false
+                    },
+                    "splash": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the guild splash (VIP only)",
+                        "required": false
+                    },
+                    "type": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "the integration type",
+                        "required": false
+                    },
+                    "bitrate": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the bitrate (in bits) of the voice channel (voice only)",
+                        "default": null,
+                        "required": false
+                    },
+                    "user_limit": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the user limit of the voice channel (voice only)",
+                        "default": null,
+                        "required": false
+                    },
+                    "permission_overwrites": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "the channel's permission overwrites",
+                        "required": false
+                    },
+                    "id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "the integration id",
+                        "required": false
+                    },
+                    "position": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "sorting position of the role",
+                        "default": null,
+                        "required": false
+                    },
+                    "limit": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "max number of members to return (1-1000)",
+                        "default": 1,
+                        "required": false
+                    },
+                    "after": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "the highest user id in the previous page",
+                        "default": 0,
+                        "required": false
+                    },
+                    "access_token": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "an oauth2 access token granted with the guilds.join to the bot's application for the user you want to add to the guild",
+                        "required": false
+                    },
+                    "nick": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "value to set users nickname to",
+                        "required": false
+                    },
+                    "mute": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is muted",
+                        "default": false,
+                        "required": false
+                    },
+                    "deaf": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "if the user is deafened",
+                        "default": false,
+                        "required": false
+                    },
+                    "channel_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "id of channel to move user to (if they are connected to voice)",
+                        "required": false
+                    },
+                    "delete-message-days": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "number of days to delete messages for (0-7)",
+                        "default": null,
+                        "required": false
+                    },
+                    "permissions": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "bitwise of the enabled/disabled permissions",
+                        "default": null,
+                        "required": false
+                    },
+                    "color": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "RGB color value",
+                        "default": null,
+                        "required": false
+                    },
+                    "hoist": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be displayed separately in the sidebar",
+                        "default": false,
+                        "required": false
+                    },
+                    "mentionable": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether the role should be mentionable",
+                        "default": false,
+                        "required": false
+                    },
+                    "days": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "number of days to prune (1 or more)",
+                        "default": null,
+                        "required": false
+                    },
+                    "expire_behavior": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "the behavior when an integration subscription lapses (see the integration object documentation)",
+                        "default": null,
+                        "required": false
+                    },
+                    "expire_grace_period": {
+                        "location": "json",
+                        "type": "integer",
+                        "description": "period (in seconds) where the integration will ignore lapsed subscriptions",
+                        "default": null,
+                        "required": false
+                    },
+                    "enable_emoticons": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "whether emoticons should be synced for this integration (twitch only currently)",
+                        "default": false,
+                        "required": false
+                    }
+                }
+            },
+            "role": {
+                "category": "guild",
+                "description": "Roles represent a set of permissions attached to a group of users. Roles have unique names, colors, and can be pinned to the side bar, causing their members to be listed separately. Roles are unique per guild, and can have separate permission profiles for the global context (guild) and channel context.",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "snowflake",
+                        "description": "role id"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "role name"
+                    },
+                    "color": {
+                        "type": "integer",
+                        "description": "integer representation of hexadecimal color code"
+                    },
+                    "hoist": {
+                        "type": "bool",
+                        "description": "if this role is pinned in the user listing"
+                    },
+                    "position": {
+                        "type": "integer",
+                        "description": "position of this role"
+                    },
+                    "permissions": {
+                        "type": "integer",
+                        "description": "permission bit set"
+                    },
+                    "managed": {
+                        "type": "bool",
+                        "description": "whether this role is managed by an integration"
+                    },
+                    "mentionable": {
+                        "type": "bool",
+                        "description": "whether this role is mentionable"
+                    }
+                }
+            }
+        },
+        "channel": {
+            "guildChannel": {
+                "category": "channel",
+                "description": "Guild channels represent an isolated set of users and messages within a Guild.",
+                "type": "object",
+                "properties": {}
+            },
+            "dmChannel": {
+                "category": "channel",
+                "description": "DM Channels represent a one-to-one conversation between two users, outside of the scope of guilds.",
+                "type": "object",
+                "properties": {}
+            },
+            "message": {
+                "category": "channel",
+                "description": "Represents a message sent in a channel within Discord.",
+                "type": "object",
+                "properties": {}
+            },
+            "reaction": {
+                "category": "channel",
+                "description": "",
+                "type": "object",
+                "properties": {}
+            },
+            "overwrite": {
+                "category": "channel",
+                "description": "",
+                "type": "object",
+                "properties": {}
+            },
+            "embed": {
+                "category": "channel",
+                "description": "",
+                "type": "object",
+                "properties": {}
+            },
+            "attachment": {
+                "category": "channel",
+                "description": "",
+                "type": "object",
+                "properties": {}
+            }
+        },
+        "invite": {
+            "invite": {
+                "category": "invite",
+                "description": "Represents a code that when used, adds a user to a guild.",
+                "type": "object",
+                "properties": {}
+            },
+            "inviteMetadata": {
+                "category": "invite",
+                "description": "",
+                "type": "object",
+                "properties": {}
+            },
+            "inviteGuild": {
+                "category": "invite",
+                "description": "Represents the parent guild of an invite.",
+                "type": "object",
+                "properties": {}
+            },
+            "inviteChannel": {
+                "category": "invite",
+                "description": "Represents the channel an invite is for.",
+                "type": "object",
+                "properties": {}
+            }
+        },
+        "user": {
+            "user": {
+                "category": "user",
+                "description": "",
+                "type": "object",
+                "properties": {}
+            },
+            "userGuild": {
+                "category": "user",
+                "description": "A brief version of a guild object",
+                "type": "object",
+                "properties": {}
+            },
+            "connection": {
+                "category": "user",
+                "description": "The connection object that the user has attached.",
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "users username, if changed may cause the users discriminator to be randomized.",
+                        "required": false
+                    },
+                    "avatar": {
+                        "location": "json",
+                        "type": "avatar data",
+                        "description": "if passed, modifies the user's avatar",
+                        "required": false
+                    },
+                    "before": {
+                        "location": "query",
+                        "type": "snowflake",
+                        "description": "get guilds before this guild ID",
+                        "default": "absent",
+                        "required": false
+                    },
+                    "after": {
+                        "location": "query",
+                        "type": "snowflake",
+                        "description": "get guilds after this guild ID",
+                        "default": "absent",
+                        "required": false
+                    },
+                    "limit": {
+                        "location": "query",
+                        "type": "integer",
+                        "description": "max number of guilds to return (1-100)",
+                        "default": 100,
+                        "required": false
+                    },
+                    "recipient_id": {
+                        "location": "json",
+                        "type": "snowflake",
+                        "description": "the recipient to open a DM channel with",
+                        "required": false
+                    },
+                    "access_tokens": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "access tokens of users that have granted your app the gdm.join scope",
+                        "required": false
+                    },
+                    "nicks": {
+                        "location": "json",
+                        "type": "dict",
+                        "description": "a dictionary of user ids to their respective nicknames",
+                        "required": false
+                    }
+                }
+            }
+        },
+        "voice": {
+            "voiceState": {
+                "category": "voice",
+                "description": "Used to represent a user's voice connection status.",
+                "type": "object",
+                "properties": {}
+            }
+        },
+        "webhook": {
+            "webhook": {
+                "category": "webhook",
+                "description": "Used to represent a webhook.",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "the default name of the webhook",
+                        "required": false
+                    },
+                    "avatar": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "base64 128x128 jpeg image for the default webhook avatar",
+                        "required": false
+                    },
+                    "wait": {
+                        "location": "query",
+                        "type": "bool",
+                        "description": "waits for server confirmation of message send before response (defaults to true; when false a message that is not saved does not return an error)",
+                        "default": false,
+                        "required": false
+                    },
+                    "content": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "the message contents (up to 2000 characters)",
+                        "required": false
+                    },
+                    "username": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "override the default username of the webhook",
+                        "required": false
+                    },
+                    "avatar_url": {
+                        "location": "json",
+                        "type": "string",
+                        "description": "override the default avatar of the webhook",
+                        "required": false
+                    },
+                    "tts": {
+                        "location": "json",
+                        "type": "bool",
+                        "description": "true if this is a TTS message",
+                        "default": false,
+                        "required": false
+                    },
+                    "file": {
+                        "location": "json",
+                        "type": "file contents",
+                        "description": "the contents of the file being sent",
+                        "required": false
+                    },
+                    "embeds": {
+                        "location": "json",
+                        "type": "array",
+                        "description": "embedded rich content",
+                        "required": false
+                    }
+                }
+            }
+        },
+        "gateway": {
+            "game": {
+                "category": "gateway",
+                "description": "",
+                "type": "object",
+                "properties": {}
+            }
+        },
+        "oauth2": {}
+    }
+}

@@ -31,6 +31,14 @@ function base_path($file) {
     return __DIR__ . '/' . $file;
 }
 
+function www_path($file) {
+    return base_path('www/' . $file);
+}
+
+function storage_path($file) {
+    return base_path('storage/' . $file);
+}
+
 $dataLanguage = file_get_contents(__DIR__ . '/bot/Module/Games/LeagueOfLegends/Generators/assets/language-strings.json');
 $dataLanguage = json_decode($dataLanguage, true);
 

@@ -11,12 +11,13 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
         '6b06ce8ccf69c43a60a1e48495a034c9' => __DIR__ . '/..' . '/react/promise-timer/src/functions.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
         'cbe44534ca71070aaa1384873fbeb72f' => __DIR__ . '/..' . '/react/partial/src/React/Partial/functions.php',
         '3be16222a6efa6dd226a219eaaff823b' => __DIR__ . '/..' . '/ratchet/pawl/src/functions_include.php',
+        '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
         '864b292aadc96fda0e2642b894a38d16' => __DIR__ . '/..' . '/team-reflex/discord-php/src/Discord/functions.php',
         '618aa3e081fc502871177c829f6a9c2a' => __DIR__ . '/..' . '/kitetail/zttp/src/Zttp.php',
     );
@@ -27,14 +28,20 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
             'WyriHaximus\\React\\Guzzle\\HttpClient\\' => 36,
             'WyriHaximus\\React\\GuzzlePsr7\\' => 29,
         ),
+        'T' => 
+        array (
+            'Twig\\' => 5,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Component\\Translation\\' => 30,
             'Symfony\\Component\\OptionsResolver\\' => 34,
+            'Slim\\' => 5,
         ),
         'R' => 
         array (
+            'RestCord\\' => 9,
             'React\\Stream\\' => 13,
             'React\\Socket\\' => 13,
             'React\\SocketClient\\' => 19,
@@ -52,6 +59,7 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
         array (
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
+            'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
         ),
         'M' => 
@@ -64,6 +72,7 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
         ),
         'I' => 
         array (
+            'Interop\\Container\\' => 18,
             'Illuminate\\Support\\' => 19,
             'Illuminate\\Database\\' => 20,
             'Illuminate\\Contracts\\' => 21,
@@ -73,7 +82,13 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
         array (
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
+            'GuzzleHttp\\Command\\Guzzle\\' => 26,
+            'GuzzleHttp\\Command\\' => 19,
             'GuzzleHttp\\' => 11,
+        ),
+        'F' => 
+        array (
+            'FastRoute\\' => 10,
         ),
         'E' => 
         array (
@@ -104,6 +119,10 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
         array (
             0 => __DIR__ . '/..' . '/wyrihaximus/react-guzzle-psr7/src',
         ),
+        'Twig\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/twig/src',
+        ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
@@ -115,6 +134,14 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
         'Symfony\\Component\\OptionsResolver\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/options-resolver',
+        ),
+        'Slim\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/slim/slim/Slim',
+        ),
+        'RestCord\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/restcord/restcord/src',
         ),
         'React\\Stream\\' => 
         array (
@@ -172,6 +199,10 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
+        'Psr\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
         'Psr\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
@@ -183,6 +214,10 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
         'LurdesBot\\' => 
         array (
             0 => __DIR__ . '/../..' . '/bot/Module',
+        ),
+        'Interop\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container',
         ),
         'Illuminate\\Support\\' => 
         array (
@@ -208,9 +243,21 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
         ),
+        'GuzzleHttp\\Command\\Guzzle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle-services/src',
+        ),
+        'GuzzleHttp\\Command\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/command/src',
+        ),
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'FastRoute\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nikic/fast-route/src',
         ),
         'Entity\\' => 
         array (
@@ -253,6 +300,10 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
     public static $prefixesPsr0 = array (
         'T' => 
         array (
+            'Twig_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/twig/lib',
+            ),
             'TrafficCophp' => 
             array (
                 0 => __DIR__ . '/..' . '/TrafficCophp/ByteBuffer/src',
@@ -263,6 +314,13 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
             'React\\Partial' => 
             array (
                 0 => __DIR__ . '/..' . '/react/partial/src',
+            ),
+        ),
+        'P' => 
+        array (
+            'Pimple' => 
+            array (
+                0 => __DIR__ . '/..' . '/pimple/pimple/src',
             ),
         ),
         'E' => 

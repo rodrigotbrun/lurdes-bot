@@ -14,7 +14,10 @@
     "vlucas/phpdotenv": "^2.4",
     "team-reflex/discord-php": "^4.0",
     "guzzlehttp/guzzle": "~6.0",
-    "kitetail/zttp": "^0.2.0"
+    "kitetail/zttp": "^0.2.0",
+    "slim/slim": "^3.8",
+    "restcord/restcord": "^0.1.4",
+    "monolog/monolog": "^1.23"
   },
   "autoload": {
     "psr-4": {
