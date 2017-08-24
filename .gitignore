@@ -1,3 +1,4 @@
-./storage/audit-data/*
-./storage/generated/*
+storage/audit-data/*
+storage/generated/*
 .idea
+.env
