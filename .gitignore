@@ -2,3 +2,5 @@ storage/audit-data/*
 storage/generated/*
 .idea
 .env
+
+!storage/*/.gitkeep
