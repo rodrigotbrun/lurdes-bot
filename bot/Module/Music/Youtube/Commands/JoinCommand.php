@@ -38,10 +38,18 @@ class JoinCommand extends DiscordCommand {
             $logger->pushHandler($file_handler);
 
             // finally Join bot
-            $this->discord->joinVoiceChannel($voiceChannel, true, true, $logger)->then(function (VoiceClient $voiceClient) {
+            $this->discord->joinVoiceChannel($voiceChannel, false, true, $logger)->then(function (VoiceClient $voiceClient) {
                 DiscordAPI::setVoiceClient($voiceClient);
 
-                // TODO !!!!!!!!!!!!
+                // TODO !!!!!!!!!!!! TEMPORARIO PARA TESTES !!!!!!!!!
+
+                $voiceClient->playFile(__DIR__ . '/senha-do-wifi.m4a')->then(function ($kind) {
+                    var_dump($kind);
+                }, function ($e) {
+                    $this->message->reply('💢 🔥 ERRO! DJ lurdes: ' . $e->getMessage() . ' 🔥 💢');
+                });
+
+                // TODO !!!!!!!!!!!! TEMPORARIO PARA TESTES !!!!!!!!!
 
             }, function ($e) {
                 $this->message->reply('💢 🔥 ERRO! DJ lurdes: ' . $e->getMessage() . ' 🔥 💢');

@@ -1,5 +1,7 @@
 storage/audit-data/*
 storage/generated/*
+storage/logs/*
+storage/audio/*
 .idea
 .env
 
