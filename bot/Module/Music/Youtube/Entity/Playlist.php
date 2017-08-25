@@ -32,4 +32,12 @@ class Playlist extends Model {
         return $pl;
     }
 
+    public static function playlistInUse($discordUserId) {
+        $f = Playlist::where('discordUserId', $discordUserId)
+            ->where('using', '1')
+            ->first();
+
+        return $f;
+    }
+
 }

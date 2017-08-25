@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
-# Host: 127.0.0.1 (MySQL 5.7.18)
-# Database: lurdes_bot
-# Generation Time: 2017-08-25 02:26:23 +0000
+# Host: 127.0.0.1 (MySQL 5.7.19)
+# Database: lurdes_bot2
+# Generation Time: 2017-08-25 18:44:27 +0000
 # ************************************************************
 
 
@@ -145,6 +145,22 @@ CREATE TABLE `musics_playlists` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `discordUserId` (`discordUserId`,`name`),
   UNIQUE KEY `code` (`code`,`discordUserId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+# Dump of table musics_playlists_tracks
+# ------------------------------------------------------------
+
+CREATE TABLE `musics_playlists_tracks` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `playlist` int(11) unsigned DEFAULT NULL,
+  `youtube_id` varchar(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `playlist` (`playlist`),
+  CONSTRAINT `musics_playlists_tracks_ibfk_1` FOREIGN KEY (`playlist`) REFERENCES `musics_playlists` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
