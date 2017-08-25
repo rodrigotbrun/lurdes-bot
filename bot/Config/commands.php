@@ -50,4 +50,78 @@ return [
             'description' => 'Lurdes Bot entra no canal de audio que você esta.',
         ]
     ],
+    'newlist' => [
+        'class' => \LurdesBot\Music\Youtube\Commands\NewPlaylistCommand::class,
+        'help' => [
+            'group' => 'Tuts Tuts',
+            'description' => 'Cria uma playlist vazia em seu nome. (adicione musicas usando o comando `@uselist` e `@addmusic`)',
+            'params' => [
+                'playlistName' => 'Nome da playlist que deseja criar'
+            ]
+        ],
+    ],
+    'playlists' => [
+        'class' => \LurdesBot\Music\Youtube\Commands\MyPlaylistsCommand::class,
+        'help' => [
+            'group' => 'Tuts Tuts',
+            'description' => 'Obtem a lista de playlists que você criou e os respectivos códigos para toca-las.',
+        ]
+    ],
+    'uselist' => [
+        'class' => \LurdesBot\Music\Youtube\Commands\UsePlaylistCommand::class,
+        'help' => [
+            'group' => 'Tuts Tuts',
+            'description' => 'Seleciona a playlist sem toca-la, para gerenciar as musicas da fila.',
+            'params' => [
+                'playlistCode' => 'Código da sua playlist (descubra qual chamando @playlists)'
+            ]
+        ]
+    ],
+    'playlist' => [
+        'class' => \LurdesBot\Music\Youtube\Commands\AddPlaylistToQueueCommand::class,
+        'help' => [
+            'group' => 'Tuts Tuts',
+            'description' => 'Adiciona as musicas da playlist na fila de musicas para tocar.',
+            'params' => [
+                'playlistCode' => 'Código da sua playlist (descubra qual chamando @playlists)'
+            ]
+        ]
+    ],
+    'playlistskip' => [
+        'class' => \LurdesBot\Music\Youtube\Commands\SkipToPlaylistToQueueCommand::class,
+        'help' => [
+            'group' => 'Tuts Tuts',
+            'description' => 'Limpa a fila de musicas atual, e começa a tocar a playlist desejada.',
+            'params' => [
+                'playlistCode' => 'Código da sua playlist (descubra qual chamando @playlists)'
+            ]
+        ]
+    ],
+    'addmusic' => [
+        'class' => \LurdesBot\Music\Youtube\Commands\AddMusicToPlaylistCommand::class,
+        'help' => [
+            'group' => 'Tuts Tuts',
+            'description' => 'Adicionar uma musica para a playlist em uso (vide `@uselist`). ',
+            'params' => [
+                'youtubeUrl' => 'URL para a música no youtube'
+            ]
+        ]
+    ],
+    'delmusic' => [
+        'class' => \LurdesBot\Music\Youtube\Commands\DeleteMusicFromPlaylistCommand::class,
+        'help' => [
+            'group' => 'Tuts Tuts',
+            'description' => 'Remove uma musica da playlist em uso (vide `@uselist`). ',
+            'params' => [
+                'playlistCode' => 'Código da sua playlist (descubra qual chamando @playlists)'
+            ]
+        ]
+    ],
+    'loopqueue' => [
+        'class' => \LurdesBot\Music\Youtube\Commands\LoopPlaylistCommand::class,
+        'help' => [
+            'group' => 'Tuts Tuts',
+            'description' => 'Executa infinitamente, sem parar, contínuamente a fila de músicas (com todas as musicas, de todas as playlists que foram adicionadas chamando `@playlist {playlistCode}`)',
+        ]
+    ],
 ];

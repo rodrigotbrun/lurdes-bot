@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
-# Host: 127.0.0.1 (MySQL 5.7.19)
-# Database: lurdes_bot2
-# Generation Time: 2017-08-24 18:35:32 +0000
+# Host: 127.0.0.1 (MySQL 5.7.18)
+# Database: lurdes_bot
+# Generation Time: 2017-08-25 02:26:23 +0000
 # ************************************************************
 
 
@@ -23,8 +23,6 @@
 # Dump of table champions
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `champions`;
-
 CREATE TABLE `champions` (
   `id` int(11) unsigned NOT NULL,
   `name` varchar(50) DEFAULT NULL,
@@ -39,8 +37,6 @@ CREATE TABLE `champions` (
 
 # Dump of table champions_play_tips
 # ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `champions_play_tips`;
 
 CREATE TABLE `champions_play_tips` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -58,8 +54,6 @@ CREATE TABLE `champions_play_tips` (
 
 # Dump of table config
 # ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `config`;
 
 CREATE TABLE `config` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -81,8 +75,6 @@ CREATE TABLE `config` (
 # Dump of table discord_guilds
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `discord_guilds`;
-
 CREATE TABLE `discord_guilds` (
   `id` varchar(25) NOT NULL DEFAULT '',
   `name` varchar(40) DEFAULT '',
@@ -99,8 +91,6 @@ CREATE TABLE `discord_guilds` (
 # Dump of table discord_users
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `discord_users`;
-
 CREATE TABLE `discord_users` (
   `id` varchar(25) NOT NULL DEFAULT '',
   `lolSummonerName` varchar(40) DEFAULT NULL,
@@ -114,8 +104,6 @@ CREATE TABLE `discord_users` (
 # Dump of table lol_version
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `lol_version`;
-
 CREATE TABLE `lol_version` (
   `current_version` varchar(10) NOT NULL DEFAULT '',
   PRIMARY KEY (`current_version`)
@@ -123,47 +111,8 @@ CREATE TABLE `lol_version` (
 
 
 
-# Dump of table music_playlist_status
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `music_playlist_status`;
-
-CREATE TABLE `music_playlist_status` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `discordChannel` varchar(40) DEFAULT NULL,
-  `music` int(11) unsigned DEFAULT NULL,
-  `status` enum('PLAYING','PAUSED','FINISHED') NOT NULL DEFAULT 'PAUSED',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `discordChannel` (`discordChannel`,`music`),
-  KEY `music` (`music`),
-  CONSTRAINT `music_playlist_status_ibfk_1` FOREIGN KEY (`music`) REFERENCES `music_playlists` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
-# Dump of table music_playlists
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `music_playlists`;
-
-CREATE TABLE `music_playlists` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `discordGuild` varchar(40) DEFAULT NULL,
-  `discordChannel` varchar(40) DEFAULT NULL,
-  `discordUser` varchar(30) DEFAULT NULL,
-  `source` enum('Y') NOT NULL DEFAULT 'Y',
-  `sourceUrl` varchar(200) DEFAULT NULL,
-  `position` int(11) DEFAULT NULL,
-  `isTemp` tinyint(1) DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
 # Dump of table musics_djs
 # ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `musics_djs`;
 
 CREATE TABLE `musics_djs` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -182,10 +131,26 @@ CREATE TABLE `musics_djs` (
 
 
 
-# Dump of table runes
+# Dump of table musics_playlists
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `runes`;
+CREATE TABLE `musics_playlists` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `discordUserId` varchar(30) DEFAULT NULL,
+  `code` int(11) NOT NULL DEFAULT '1',
+  `name` varchar(50) DEFAULT NULL,
+  `using` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `discordUserId` (`discordUserId`,`name`),
+  UNIQUE KEY `code` (`code`,`discordUserId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+# Dump of table runes
+# ------------------------------------------------------------
 
 CREATE TABLE `runes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -207,8 +172,6 @@ CREATE TABLE `runes` (
 # Dump of table spells
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `spells`;
-
 CREATE TABLE `spells` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -225,8 +188,6 @@ CREATE TABLE `spells` (
 
 # Dump of table summoners
 # ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `summoners`;
 
 CREATE TABLE `summoners` (
   `id` int(11) NOT NULL,
