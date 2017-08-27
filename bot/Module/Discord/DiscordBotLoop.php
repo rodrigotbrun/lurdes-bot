@@ -29,9 +29,9 @@ class DiscordBotLoop extends Discord {
     }
 
     public function loop() {
-//        Hook::getInstance()->fire('on-discord-ready', [
-//            'teste' => ' Mundo'
-//        ]);
+        Hook::getInstance()->fire('on-discord-ready', [
+            'teste' => ' Mundo'
+        ]);
 
         $this->on('ready', function ($discord) {
             $discord->on('message', function ($message, $discord) {
@@ -53,7 +53,7 @@ class DiscordBotLoop extends Discord {
 
                                 if (class_exists($class, true)) {
                                     $commandExecution = new $class($message, $discord);
-                                    $commandExecution->execute($params);
+                                    $commandExecution->fire($params, $class);
                                 } else {
                                     $message->reply('🤕 Não conheço este comando!');
 

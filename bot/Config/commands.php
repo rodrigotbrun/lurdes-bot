@@ -124,4 +124,11 @@ return [
             'description' => 'Executa infinitamente, sem parar, contínuamente a fila de músicas (com todas as musicas, de todas as playlists que foram adicionadas chamando `@playlist {playlistCode}`)',
         ]
     ],
+    'queue' => [
+        'class' => \LurdesBot\Music\Youtube\Commands\ListQueueCommand::class,
+        'help' => [
+            'group' => 'Tuts Tuts',
+            'description' => 'Retorna a lista de musicas para tocar (para o canal de audio em que a DJ Lurdes esta)',
+        ]
+    ],
 ];

@@ -17,7 +17,8 @@
     "kitetail/zttp": "^0.2.0",
     "slim/slim": "^3.8",
     "restcord/restcord": "^0.1.4",
-    "monolog/monolog": "^1.23"
+    "monolog/monolog": "^1.23",
+    "madcoda/php-youtube-api": "^1.2"
   },
   "autoload": {
     "psr-4": {

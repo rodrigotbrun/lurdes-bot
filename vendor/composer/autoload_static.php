@@ -65,6 +65,7 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Madcoda\\Youtube\\' => 16,
         ),
         'L' => 
         array (
@@ -215,6 +216,10 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Madcoda\\Youtube\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/madcoda/php-youtube-api/src',
+        ),
         'LurdesBot\\' => 
         array (
             0 => __DIR__ . '/../..' . '/bot/Module',
@@ -340,12 +345,17 @@ class ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b
         ),
     );
 
+    public static $classMap = array (
+        'Madcoda\\compat' => __DIR__ . '/..' . '/madcoda/php-youtube-api/src/compat.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitfee986edcaf23a7539d4eb6a5804a97b::$classMap;
 
         }, null, ClassLoader::class);
     }

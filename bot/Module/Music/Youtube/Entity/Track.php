@@ -14,8 +14,23 @@ class Track extends Model {
 
     protected $table = 'musics_playlists_tracks';
 
+    public static $youtubeApi = null;
+
+    public function getNameAttribute() {
+        return base64_decode($this->attributes['name']);
+    }
+
+    public function setNameAttribute($name) {
+        $this->attributes['name'] = base64_encode($name);
+    }
+
     public static function addMusic($url, Playlist $playlist) {
         $videoId = YoutubeAPI::videoIdFromUrl($url);
+
+        if (self::$youtubeApi === null)
+            self::$youtubeApi = new YoutubeAPI();
+
+        $videoInfo = self::$youtubeApi->getVideoInfo($videoId);
 
         if (empty($videoId))
             return self::INVALID_TRACK_URL;
@@ -28,10 +43,12 @@ class Track extends Model {
             $track = new Track();
             $track->playlist = $playlist->id;
             $track->youtube_id = $videoId;
-            $s = $track->save();
+            $track->name = $videoInfo->snippet->localized->title;
+            $track->duration = $videoInfo->contentDetails->duration;
+            $s = $track->saveOrFail();
 
             if ($s)
-                return self::TRACK_ADDED_TO_PLAYLIST;
+                return $track;
             return self::TRACK_NOT_ADDED_TO_PLAYLIST;
         }
         return self::TRACK_ALREADY_EXISTS_ON_PLAYLIST;

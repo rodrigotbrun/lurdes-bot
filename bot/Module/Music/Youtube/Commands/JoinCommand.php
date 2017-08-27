@@ -7,6 +7,7 @@ use LurdesBot\Discord\DiscordAPI;
 use LurdesBot\Discord\DiscordCommand;
 use LurdesBot\Discord\Entity\DiscordGuild;
 use LurdesBot\Music\Youtube\Entity\MusicDJ;
+use LurdesBot\Music\Youtube\Entity\Playlist;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 
@@ -29,7 +30,14 @@ class JoinCommand extends DiscordCommand {
         $dj->bitrate = $voiceChannel->bitrate;
         $dj->djStatus = MusicDJ::STATUS_PAUSED;
         $dj->currentTrack = null;
-        $dj->currentPlaylist = null;
+
+        $playlist = Playlist::playlistInUse($this->message->author->id);
+        if (!empty($playlist)) {
+            $dj->currentPlaylist = $playlist->id;
+        } else {
+            $dj->currentPlaylist = null;
+        }
+
         $saved = $dj->save();
 
         if ($saved) {

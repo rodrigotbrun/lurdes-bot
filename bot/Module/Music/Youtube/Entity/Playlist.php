@@ -40,4 +40,8 @@ class Playlist extends Model {
         return $f;
     }
 
+    public function tracks() {
+        return $this->hasMany(Track::class, 'playlist', 'id');
+    }
+
 }

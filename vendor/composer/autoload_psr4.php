@@ -31,6 +31,7 @@ return array(
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
+    'Madcoda\\Youtube\\' => array($vendorDir . '/madcoda/php-youtube-api/src'),
     'LurdesBot\\' => array($baseDir . '/bot/Module'),
     'Interop\\Container\\' => array($vendorDir . '/container-interop/container-interop/src/Interop/Container'),
     'Illuminate\\Support\\' => array($vendorDir . '/illuminate/support'),
