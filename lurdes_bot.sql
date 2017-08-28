@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
-# Host: 127.0.0.1 (MySQL 5.7.19)
-# Database: lurdes_bot2
-# Generation Time: 2017-08-25 18:44:27 +0000
+# Host: 127.0.0.1 (MySQL 5.7.18)
+# Database: lurdes_bot
+# Generation Time: 2017-08-27 18:27:06 +0000
 # ************************************************************
 
 
@@ -64,6 +64,7 @@ CREATE TABLE `config` (
   `discord_bot_token` varchar(300) DEFAULT NULL,
   `discord_text_webhook` varchar(300) DEFAULT NULL,
   `riot_api_key` varchar(300) DEFAULT NULL,
+  `google_api_key` varchar(200) DEFAULT NULL,
   `color_ally_team` int(11) DEFAULT NULL,
   `color_enemy_team` int(11) DEFAULT NULL,
   `lol_version` varchar(10) DEFAULT NULL,
@@ -126,7 +127,11 @@ CREATE TABLE `musics_djs` (
   `djStatus` enum('PLAYING','PAUSED','FINISHED') NOT NULL DEFAULT 'PAUSED',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `currentPlaylist` (`currentPlaylist`),
+  KEY `currentTrack` (`currentTrack`),
+  CONSTRAINT `musics_djs_ibfk_1` FOREIGN KEY (`currentPlaylist`) REFERENCES `musics_playlists` (`id`),
+  CONSTRAINT `musics_djs_ibfk_2` FOREIGN KEY (`currentTrack`) REFERENCES `musics_playlists_tracks` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -156,11 +161,29 @@ CREATE TABLE `musics_playlists_tracks` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `playlist` int(11) unsigned DEFAULT NULL,
   `youtube_id` varchar(11) DEFAULT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  `duration` varchar(15) DEFAULT 'PT0S',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `playlist` (`playlist`),
   CONSTRAINT `musics_playlists_tracks_ibfk_1` FOREIGN KEY (`playlist`) REFERENCES `musics_playlists` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table musics_queue
+# ------------------------------------------------------------
+
+CREATE TABLE `musics_queue` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `discordChannelId` varchar(25) DEFAULT NULL,
+  `track` int(11) unsigned DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_AT` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `track` (`track`),
+  CONSTRAINT `musics_queue_ibfk_1` FOREIGN KEY (`track`) REFERENCES `musics_playlists_tracks` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 

@@ -10,8 +10,8 @@ class ListQueueCommand extends DiscordCommand {
 
     public function execute($params) {
         $voiceChannel = $this->userCurrentVoiceChannel();
-        $this->logger->debug('Getting current voice channel');
-        $this->logger->debug('Voice channel', [$voiceChannel]);
+        self::$logger->debug('Getting current voice channel');
+        self::$logger->debug('Voice channel', [$voiceChannel]);
 
         if (empty($voiceChannel)) {
             $this->message->channel->sendMessage('‼️🎧‼️ Sem tuts tuts? Você precisa entrar em um canal de voz para invocar a DJ Lurdes!');
@@ -21,7 +21,7 @@ class ListQueueCommand extends DiscordCommand {
         $dj = MusicDJ::where('discordVoiceChannelId', $voiceChannel->id)
             ->first();
 
-        $this->logger->debug('DJ', [$dj]);
+        self::$logger->debug('DJ', [$dj]);
 
         if (empty($dj)) {
             $this->message->channel->sendMessage('Chame a DJ Lurdes para um canal de voz primeiro, usando o comando `' . CONFIG['discord_command_identifier'] . '`join');
@@ -31,7 +31,7 @@ class ListQueueCommand extends DiscordCommand {
         $queue = QueueItem::where('discordChannelId', $voiceChannel->id)
             ->get();
 
-        $this->logger->debug('Queue Items', [$queue]);
+        self::$logger->debug('Queue Items', [$queue]);
 
         if (count($queue) == 0) {
             $this->message->reply('Nenhuma musica na fila para tocar!');

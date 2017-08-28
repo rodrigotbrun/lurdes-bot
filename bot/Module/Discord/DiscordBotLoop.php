@@ -66,6 +66,22 @@ class DiscordBotLoop extends Discord {
                                 }
                             }
                         }
+                    } else {
+                        // verifica se o bot esta esperando uma resposta
+                        if (!empty(DiscordCommand::$lockedTo[$message->author->id])) {
+                            $message->content = trim($message->content);
+
+                            if ($message->content !== '-') {
+                                DiscordCommand::onChooseOption($message->author->id, $message->content, $discord, $message);
+                            } else {
+                                unset(DiscordCommand::$onChooseOption[$message->author->id]);
+                                unset(DiscordCommand::$lockedTo[$message->author->id]);
+                                unset(DiscordCommand::$optionsData[$message->author->id]);
+
+                                $message->reply('Solicitação cancelada!');
+                            }
+                        }
+
                     }
                 }
             });

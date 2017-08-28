@@ -131,4 +131,18 @@ return [
             'description' => 'Retorna a lista de musicas para tocar (para o canal de audio em que a DJ Lurdes esta)',
         ]
     ],
+    'search' => [
+        'class' => \LurdesBot\Music\Youtube\Commands\SearchMusicCommand::class,
+        'help' => [
+            'group' => 'Tuts Tuts',
+            'description' => 'Retona resultados de busca do youtube para a sua consulta.',
+        ]
+    ],
+    'play' => [
+        'class' => \LurdesBot\Music\Youtube\Commands\PlayCommand::class,
+        'help' => [
+            'group' => 'Tuts Tuts',
+            'description' => 'Adiciona uma música na fila para tocar ou toca imediatamente se a fila etiver vazia',
+        ]
+    ],
 ];

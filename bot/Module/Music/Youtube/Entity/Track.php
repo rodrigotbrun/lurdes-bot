@@ -54,4 +54,40 @@ class Track extends Model {
         return self::TRACK_ALREADY_EXISTS_ON_PLAYLIST;
     }
 
+    public static function createTrack($url) {
+        var_dump(-2);
+        $videoId = YoutubeAPI::videoIdFromUrl($url);
+        var_dump(-1);
+
+        if (self::$youtubeApi === null)
+            self::$youtubeApi = new YoutubeAPI();
+        var_dump(-4);
+
+        $videoInfo = self::$youtubeApi->getVideoInfo($videoId);
+
+        var_dump(1);
+        if (empty($videoId))
+            return self::INVALID_TRACK_URL;
+        var_dump(2);
+
+        $track = Track::where('youtube_id', $videoId)
+            ->first();
+        var_dump(3);
+
+        if (empty($track)) {
+            var_dump(5);
+            $track = new Track();
+            $track->youtube_id = $videoId;
+            $track->name = $videoInfo->snippet->localized->title;
+            $track->duration = $videoInfo->contentDetails->duration;
+            $s = $track->saveOrFail();
+            var_dump(6);
+
+            if ($s)
+                return $track;
+        }
+
+        return $track;
+    }
+
 }

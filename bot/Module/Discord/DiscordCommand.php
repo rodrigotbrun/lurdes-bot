@@ -19,6 +19,21 @@ abstract class DiscordCommand {
     /** @var array */
     protected $parameters;
 
+    /** @var integer */
+    protected $mode;
+
+    /** @var \Closure[] */
+    public static $onChooseOption = [];
+
+    /** @var array[] */
+    public static $optionsData = [];
+
+    /** @var string[] */
+    public static $lockedTo = [];
+
+    /** @var Logger */
+    public static $logger;
+
     /**
      * DiscordCommand constructor.
      * @param Message $message
@@ -28,9 +43,9 @@ abstract class DiscordCommand {
         $this->message = $message;
         $this->discord = $discord;
 
-        $this->logger = new Logger('cmd_logger');
+        self::$logger = new Logger('cmd_logger');
         $file_handler = new StreamHandler(base_path('storage/logs/commands.log'));
-        $this->logger->pushHandler($file_handler);
+        self::$logger->pushHandler($file_handler);
     }
 
     /**
@@ -40,11 +55,11 @@ abstract class DiscordCommand {
     abstract public function execute($params);
 
     public function fire($params, $classname) {
-        $this->logger->notice('------------------------ ' . $classname . '------------------------');
+        self::$logger->notice('------------------------ ' . $classname . '------------------------');
         try {
             $this->execute($params);
         } catch (\Exception $e) {
-            $this->logger->error($e);
+            self::$logger->error($e);
             $this->message->reply('🤢 ' . $e->getMessage());
         }
     }
@@ -66,6 +81,42 @@ abstract class DiscordCommand {
         }
 
         return $voiceChannel;
+    }
+
+    /**
+     * @param $userRequested string
+     * @param $className string
+     * @param $data array
+     * @param $callback \Closure
+     */
+    protected function waitOptionChoose($userRequested, $className, $data, $callback) {
+        echo '+++ Waiting user ' . $this->message->author->username . '#' . $this->message->author->id . ' to send an answer --> ' . $className, PHP_EOL;
+        DiscordCommand::$lockedTo[$userRequested] = $className;
+        DiscordCommand::$optionsData[$userRequested] = $data;
+        DiscordCommand::$onChooseOption[$userRequested] = $callback;
+    }
+
+    public static function onChooseOption($userRequested, $position, Discord $discord, Message $message) {
+        if (!preg_match('/[0-9]+/', $position)) {
+            $message->reply('Opção inválida! Favor responder usando o número da linha do resultado desejado! ( ou envie `-` para cancelar a solicitação)');
+            return;
+        }
+
+        $closure = DiscordCommand::$onChooseOption[$userRequested];
+        $data = DiscordCommand::$optionsData[$userRequested];
+
+        echo '+++++ User ' . $message->author->username . '#' . $message->author->id . ' answered with option ' . $position . ' --> ' . DiscordCommand::$lockedTo[$userRequested], PHP_EOL;
+
+        try {
+            $closure($data, $position - 1, $discord, $message);
+        } catch (\Exception $e) {
+            self::$logger->error($e);
+            $message->reply('🤢 ' . $e->getMessage());
+        }
+
+        unset(DiscordCommand::$onChooseOption[$userRequested]);
+        unset(DiscordCommand::$lockedTo[$userRequested]);
+        unset(DiscordCommand::$optionsData[$userRequested]);
     }
 
 }
