@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.18)
 # Database: lurdes_bot
-# Generation Time: 2017-08-27 18:27:06 +0000
+# Generation Time: 2017-08-28 03:15:02 +0000
 # ************************************************************
 
 
@@ -160,7 +160,7 @@ CREATE TABLE `musics_playlists` (
 CREATE TABLE `musics_playlists_tracks` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `playlist` int(11) unsigned DEFAULT NULL,
-  `youtube_id` varchar(11) DEFAULT NULL,
+  `youtube_id` varchar(11) DEFAULT '',
   `name` varchar(200) DEFAULT NULL,
   `duration` varchar(15) DEFAULT 'PT0S',
   `created_at` datetime DEFAULT NULL,
