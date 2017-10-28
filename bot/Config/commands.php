@@ -1,6 +1,13 @@
 <?php
 
 return [
+    'help' => [
+        'class' => \LurdesBot\Lurdes\Commands\HelpCommand::class,
+        'help' => [
+            'group' => 'Lurdes',
+            'description' => 'Abre este menu de ajuda'
+        ]
+    ],
     'lolv' => [
         'class' => \LurdesBot\Games\LeagueOfLegends\Commands\VersionCommand::class,
         'help' => [
@@ -143,6 +150,27 @@ return [
         'help' => [
             'group' => 'Tuts Tuts',
             'description' => 'Adiciona uma música na fila para tocar ou toca imediatamente se a fila etiver vazia',
+        ]
+    ],
+    'pause' => [
+        'class' => \LurdesBot\Music\Youtube\Commands\PauseCommand::class,
+        'help' => [
+            'group' => 'Tuts Tuts',
+            'description' => 'Pausa a musica atual!',
+        ]
+    ],
+    'next' => [
+        'class' => \LurdesBot\Music\Youtube\Commands\NextCommand::class,
+        'help' => [
+            'group' => 'Tuts Tuts',
+            'description' => 'Passa para a próxima musica da fila!',
+        ]
+    ],
+    'clear' => [
+        'class' => \LurdesBot\Music\Youtube\Commands\ClearQueueCommand::class,
+        'help' => [
+            'group' => 'Tuts Tuts',
+            'description' => 'Limpa as músicas da fila para tocar (não para a musica atual)',
         ]
     ],
 ];

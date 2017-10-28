@@ -34,6 +34,7 @@ class DiscordBotLoop extends Discord {
         ]);
 
         $this->on('ready', function ($discord) {
+
             $discord->on('message', function ($message, $discord) {
                 if (!$message->author->user->bot) {
                     if (starts_with($message->content, CONFIG['discord_command_identifier'])) {
@@ -60,6 +61,8 @@ class DiscordBotLoop extends Discord {
                                 }
                             } else {
                                 if ($cmd === 'help') {
+                                    echo '+ Command "', $cmd, '" received from "', $message->author->username, '#', $message->author->id, '"', PHP_EOL;
+
                                     $this->sendHelp($message);
                                 } else {
                                     $message->reply('🤒 Não conheço este comando!');
@@ -92,54 +95,7 @@ class DiscordBotLoop extends Discord {
     }
 
     public function sendHelp($message) {
-        $at = CONFIG['discord_command_identifier'];
-        $lines = '';
-        $commands = $this->commands;
 
-        $grouped = [];
-        $ungrouped = [];
-        $i = 0;
-        foreach ($commands as $name => $c) {
-            if (isset($c['help']['group'])) {
-                if (!isset($grouped[$c['help']['group']]))
-                    $grouped[$c['help']['group']] = [];
-
-                $grouped[$c['help']['group']][$name] = $c;
-            } else {
-                $ungrouped[$name] = $c;
-            }
-
-            $i++;
-        }
-
-        if (count($ungrouped) > 0) {
-            foreach ($ungrouped as $name => $c) {
-                $params = '';
-                if (isset($c['help']['params'])) {
-                    $params = array_keys($c['help']['params']);
-                    $params = ' `{' . implode('}` `{', $params) . '}` ';
-                }
-
-                $lines .= "- `{$at}{$name}`{$params}   →   {$c['help']['description']}\n";
-            }
-        }
-
-        foreach ($grouped as $groupname => $commands) {
-            $lines .= "\n```css\n{$groupname}```\n";
-
-            foreach ($commands as $name => $c) {
-                $params = '';
-                if (isset($c['help']['params'])) {
-                    $params = array_keys($c['help']['params']);
-                    $params = ' `{' . implode('}` `{', $params) . '}` ';
-                }
-
-                $lines .= "- `{$at}{$name}`{$params}   →   {$c['help']['description']}\n";
-            }
-        }
-
-        $help = "```Markdown\n# ❓❓ Comandos Lurdes Bot ❓❓ #```\n{$lines}";
-        $message->channel->sendMessage($help);
     }
 
 }

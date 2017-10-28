@@ -45,19 +45,14 @@ class JoinCommand extends DiscordCommand {
             $file_handler = new StreamHandler(base_path('storage/logs/d-voice-channel-' . $voiceChannel->id . '.log'));
             $logger->pushHandler($file_handler);
 
-            // finally Join bot
             $this->discord->joinVoiceChannel($voiceChannel, false, true, $logger)->then(function (VoiceClient $voiceClient) {
                 DiscordAPI::setVoiceClient($voiceClient);
 
-                // TODO !!!!!!!!!!!! TEMPORARIO PARA TESTES !!!!!!!!!
-
-                $voiceClient->playFile(__DIR__ . '/senha-do-wifi.m4a')->then(function ($kind) {
-                    var_dump($kind);
+                $this->message->channel->sendMessage("Eai pessoal! Lurdes na area!");
+                $voiceClient->playFile(storage_path('static-audio/join.mp3'))->then(function ($kind) {
                 }, function ($e) {
                     $this->message->reply('💢 🔥 ERRO! DJ lurdes: ' . $e->getMessage() . ' 🔥 💢');
                 });
-
-                // TODO !!!!!!!!!!!! TEMPORARIO PARA TESTES !!!!!!!!!
 
             }, function ($e) {
                 $this->message->reply('💢 🔥 ERRO! DJ lurdes: ' . $e->getMessage() . ' 🔥 💢');
